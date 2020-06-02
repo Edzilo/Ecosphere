@@ -20,6 +20,7 @@ public class Checkpoint : MonoBehaviour
 
     public void EnterInRange(Range range)
     {
+        print("Checkpoint " + number + " activated");
         if (!Activated)
         {
             Activated = true;

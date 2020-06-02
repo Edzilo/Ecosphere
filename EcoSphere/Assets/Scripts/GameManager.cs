@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
         set
         {
             currentCheckpoint = value;
-            player.FallBackPosition = Checkpoints[0].transform.position + new Vector3(0,0.5f,-1.0f);
+            player.FallBackPosition = Checkpoints[value].transform.position + new Vector3(0,0.5f,-1.0f);
         }
     }
     
