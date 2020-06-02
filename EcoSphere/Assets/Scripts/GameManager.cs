@@ -10,15 +10,16 @@ public class GameManager : MonoBehaviour
 
     public Player player;
 
-    public int currentCheckpoint = 0;
+    public Checkpoint currentCheckpoint;
 
     public static GameManager Instance { get { return instance; } }
 
-    public int CurrentCheckpoint { get => currentCheckpoint;
+    public Checkpoint CurrentCheckpoint { get => currentCheckpoint;
         set
         {
+            currentCheckpoint.Activated = false;
             currentCheckpoint = value;
-            player.FallBackPosition = Checkpoints[value].transform.position + new Vector3(0,0.5f,-1.0f);
+            player.FallBackPosition = Checkpoints[value.number].transform.position + new Vector3(0,0.5f,-1.0f);
         }
     }
     
@@ -34,6 +35,12 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
         }
+    }
+
+    private void Start()
+    {
+        CurrentCheckpoint.Activated = true;
+        player.FallBackPosition = CurrentCheckpoint.transform.position + new Vector3(0, 0.5f, -1.0f);
     }
 
 }
