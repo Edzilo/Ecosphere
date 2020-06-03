@@ -12,6 +12,10 @@ public class Checkpoint : MonoBehaviour
 
     public Range range;
 
+    public AudioSource audioSource;
+    public AudioClip clip;
+    public float volume = 0.5f;
+
     private void Start()
     {
         model_off.SetActive(true);
@@ -25,6 +29,7 @@ public class Checkpoint : MonoBehaviour
             activated = value;
             if (value)
             {
+                audioSource.PlayOneShot(clip, volume);
                 print("Checkpoint " + number + " activated");
                 GameManager.Instance.CurrentCheckpoint = this;
                 model_off.SetActive(false);
