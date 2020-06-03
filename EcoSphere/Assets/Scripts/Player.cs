@@ -58,11 +58,8 @@ public class Player : MonoBehaviour
         float moveVertical = Input.GetAxis("Vertical");
 
         movement = new Vector3(moveHorizontal, 0, moveVertical);
-        if(IsGrounded())
-        {
 
-        }
-        if (IsGrounded() && Input.GetKeyDown(KeyCode.Space) )
+        if (/*IsGrounded()*/ !offGround && Input.GetKeyDown(KeyCode.Space) )
         {
             rb.AddForce(Vector3.up * CalculateJumpVerticalSpeed(), ForceMode.Impulse);
         }
@@ -86,5 +83,23 @@ public class Player : MonoBehaviour
     private bool isFalling()
     {
         return transform.position.y <= -1.0f;
+    }
+
+    // Detect collision with floor
+    void OnCollisionEnter(Collision hit)
+    {
+        if (hit.gameObject.layer == 0)
+        {
+            offGround = false;
+        }
+    }
+
+    // Detect collision exit with floor
+    void OnCollisionExit(Collision hit)
+    {
+        if (hit.gameObject.layer == 0)
+        {
+            offGround = true;
+        }
     }
 }
