@@ -20,6 +20,10 @@ public class GameManager : MonoBehaviour
             currentCheckpoint.Activated = false;
             currentCheckpoint = value;
             player.FallBackPosition = Checkpoints[value.number].transform.position + new Vector3(0,0.5f,-1.0f);
+            if(currentCheckpoint.number == Checkpoints.Count - 1)
+            {
+                Win();
+            }
         }
     }
     
@@ -41,6 +45,11 @@ public class GameManager : MonoBehaviour
     {
         CurrentCheckpoint.Activated = true;
         player.FallBackPosition = CurrentCheckpoint.transform.position + new Vector3(0, 0.5f, -1.0f);
+    }
+
+    private void Win()
+    {
+        print("You won");
     }
 
 }
