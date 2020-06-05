@@ -25,21 +25,24 @@ public class Checkpoint : MonoBehaviour
     public bool Activated {
         get => activated;
         set
-        {
-            activated = value;
+        {      
             if (value)
             {
-                audioSource.PlayOneShot(clip, volume);
-                print("Checkpoint " + number + " activated");
-                GameManager.Instance.CurrentCheckpoint = this;
-                model_off.SetActive(false);
-                model_on.SetActive(true);
+                if( !activated)
+                {
+                    audioSource.PlayOneShot(clip, volume);
+                    print("Checkpoint " + number + " activated");
+                    GameManager.Instance.CurrentCheckpoint = this;
+                    model_off.SetActive(false);
+                    model_on.SetActive(true);
 
+                }
             } else
             {
                 model_off.SetActive(true);
                 model_on.SetActive(false);
             }
+            activated = value;
         }
     }
 
