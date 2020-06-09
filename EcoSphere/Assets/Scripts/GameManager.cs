@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
 
     // Singleton
     private static GameManager instance;
+
+    public Text chronoText;
 
     public Player player;
 
@@ -45,6 +48,12 @@ public class GameManager : MonoBehaviour
     {
         CurrentCheckpoint.Activated = true;
         player.FallBackPosition = CurrentCheckpoint.transform.position + new Vector3(0, 0.5f, -1.0f);
+        SetTime();
+    }
+
+    private void Update()
+    {
+        SetTime();
     }
 
     private void Win()
@@ -52,4 +61,11 @@ public class GameManager : MonoBehaviour
         print("You won");
     }
 
+    private void SetTime()
+    {
+        //int hours = (int)Time.time / 3600;
+        int minutes = (int)(Time.time % 3600) / 60;
+        int seconds = (int)(Time.time % 3600) % 60;
+        chronoText.text = "" + minutes + ":" + seconds + ":" + System.Math.Round((( Time.time - (int) Time.time) * 10),2);
+    }
 }
