@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject naturalLights;
 
-    private float naturalLightsSpeedfactor = 4.0f;
+    private float naturalLightsSpeedfactor = 2.0f;
 
     public static GameManager Instance { get { return instance; } }
 
@@ -57,8 +57,6 @@ public class GameManager : MonoBehaviour
         CurrentCheckpoint.Activated = true;
         player.FallBackPosition = CurrentCheckpoint.transform.position + new Vector3(0, 0.5f, -1.0f);
         chronoText.text = ComputeTime();
-        RenderSettings.ambientLight = Color.black;
-        //updateNaturalLights();
     }
 
     private void Update()
@@ -86,6 +84,18 @@ public class GameManager : MonoBehaviour
         foreach (Transform child in naturalLights.transform)
         {
             child.transform.Rotate(Time.deltaTime * naturalLightsSpeedfactor, 0, 0);
+            if(child.name == "Sun")
+            {
+                if(child.transform.rotation.eulerAngles.x >= -20 && child.transform.rotation.eulerAngles.x <= 180)
+                {
+                    print("Sun is on");
+                    child.GetComponent<Light>().intensity = 1.0f;
+                } else
+                {
+                    child.GetComponent<Light>().intensity = 0.0f;
+                    print("Sun is off");
+                }
+            }
         }
     }
 
