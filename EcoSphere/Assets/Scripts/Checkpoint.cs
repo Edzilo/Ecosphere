@@ -48,7 +48,7 @@ public class Checkpoint : MonoBehaviour
 
     public void EnterInRange(Range range)
     {      
-        if (!Activated)
+        if (!Activated && GameManager.Instance.CurrentCheckpoint.number == number-1)
         {
             Activated = true;
         }
