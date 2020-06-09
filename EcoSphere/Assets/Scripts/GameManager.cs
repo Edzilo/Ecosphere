@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
 
     public Text chronoText;
 
+    public Text checkpointTimes;
+
     public Player player;
 
     public Checkpoint currentCheckpoint;
@@ -23,6 +25,7 @@ public class GameManager : MonoBehaviour
             currentCheckpoint.Activated = false;
             currentCheckpoint = value;
             player.FallBackPosition = Checkpoints[value.number].transform.position + new Vector3(0,0.5f,-1.0f);
+            if(CurrentCheckpoint.number != 0)checkpointTimes.text += ComputeTime() + "\n";
             if(currentCheckpoint.number == Checkpoints.Count - 1)
             {
                 Win();
@@ -48,12 +51,12 @@ public class GameManager : MonoBehaviour
     {
         CurrentCheckpoint.Activated = true;
         player.FallBackPosition = CurrentCheckpoint.transform.position + new Vector3(0, 0.5f, -1.0f);
-        SetTime();
+        chronoText.text = ComputeTime();
     }
 
     private void Update()
     {
-        SetTime();
+        chronoText.text = ComputeTime();
     }
 
     private void Win()
@@ -61,11 +64,12 @@ public class GameManager : MonoBehaviour
         print("You won");
     }
 
-    private void SetTime()
+    private string ComputeTime()
     {
         //int hours = (int)Time.time / 3600;
         int minutes = (int)(Time.time % 3600) / 60;
         int seconds = (int)(Time.time % 3600) % 60;
-        chronoText.text = "" + minutes + ":" + seconds + ":" + System.Math.Round((( Time.time - (int) Time.time) * 10),2);
+        return "" + minutes + ":" + seconds + ":" + System.Math.Round((( Time.time - (int) Time.time) * 100),0);
     }
+
 }
