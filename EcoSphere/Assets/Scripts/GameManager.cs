@@ -17,6 +17,10 @@ public class GameManager : MonoBehaviour
 
     public Checkpoint currentCheckpoint;
 
+    public GameObject naturalLights;
+
+    private float naturalLightsSpeedfactor = 4.0f;
+
     public static GameManager Instance { get { return instance; } }
 
     public Checkpoint CurrentCheckpoint { get => currentCheckpoint;
@@ -25,7 +29,8 @@ public class GameManager : MonoBehaviour
             currentCheckpoint.Activated = false;
             currentCheckpoint = value;
             player.FallBackPosition = Checkpoints[value.number].transform.position + new Vector3(0,0.5f,-1.0f);
-            if(CurrentCheckpoint.number != 0)checkpointTimes.text += ComputeTime() + "\n";
+            if(CurrentCheckpoint.number != 0)checkpointTimes.text += "(" + currentCheckpoint.number 
+                    + ") " + ComputeTime() + "\n";
             if(currentCheckpoint.number == Checkpoints.Count - 1)
             {
                 Win();
@@ -52,16 +57,20 @@ public class GameManager : MonoBehaviour
         CurrentCheckpoint.Activated = true;
         player.FallBackPosition = CurrentCheckpoint.transform.position + new Vector3(0, 0.5f, -1.0f);
         chronoText.text = ComputeTime();
+        RenderSettings.ambientLight = Color.black;
+        //updateNaturalLights();
     }
 
     private void Update()
     {
         chronoText.text = ComputeTime();
+        updateNaturalLights();
     }
 
     private void Win()
     {
         print("You won");
+        Time.timeScale = 0.0f;
     }
 
     private string ComputeTime()
@@ -70,6 +79,14 @@ public class GameManager : MonoBehaviour
         int minutes = (int)(Time.time % 3600) / 60;
         int seconds = (int)(Time.time % 3600) % 60;
         return "" + minutes + ":" + seconds + ":" + System.Math.Round((( Time.time - (int) Time.time) * 100),0);
+    }
+
+    private void updateNaturalLights()
+    {
+        foreach (Transform child in naturalLights.transform)
+        {
+            child.transform.Rotate(Time.deltaTime * naturalLightsSpeedfactor, 0, 0);
+        }
     }
 
 }
