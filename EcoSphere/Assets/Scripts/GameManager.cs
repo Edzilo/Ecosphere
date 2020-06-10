@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject naturalLights;
 
-    private float naturalLightsSpeedfactor = 2.0f;
+    private float naturalLightsSpeedfactor = 1.0f;
 
     public static GameManager Instance { get { return instance; } }
 
@@ -86,10 +86,16 @@ public class GameManager : MonoBehaviour
             child.transform.Rotate(Time.deltaTime * naturalLightsSpeedfactor, 0, 0);
             if(child.name == "Sun")
             {
-                if(child.transform.rotation.eulerAngles.x >= -20 && child.transform.rotation.eulerAngles.x <= 180)
+                if(child.transform.rotation.eulerAngles.x >= 280 || child.transform.rotation.eulerAngles.x <= 210)
                 {
                     print("Sun is on");
-                    child.GetComponent<Light>().intensity = 1.0f;
+                    if(child.transform.rotation.eulerAngles.x >= 280)
+                    {
+                        child.GetComponent<Light>().intensity = 1.0f - (360.0f - child.transform.rotation.eulerAngles.x)/360.0f;             
+                    } else
+                    {
+                        child.GetComponent<Light>().intensity = 1.0f;
+                    }
                 } else
                 {
                     child.GetComponent<Light>().intensity = 0.0f;
