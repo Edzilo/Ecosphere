@@ -88,7 +88,7 @@ public class GameManager : MonoBehaviour
             {
                 if(child.transform.rotation.eulerAngles.x >= 280 || child.transform.rotation.eulerAngles.x <= 210)
                 {
-                    print("Sun is on");
+                   // print("Sun is on");
                     if(child.transform.rotation.eulerAngles.x >= 280)
                     {
                         child.GetComponent<Light>().intensity = 1.0f - (360.0f - child.transform.rotation.eulerAngles.x)/360.0f;             
@@ -99,7 +99,7 @@ public class GameManager : MonoBehaviour
                 } else
                 {
                     child.GetComponent<Light>().intensity = 0.0f;
-                    print("Sun is off");
+                    //print("Sun is off");
                 }
             }
         }
