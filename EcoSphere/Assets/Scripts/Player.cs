@@ -54,18 +54,35 @@ public class Player : MonoBehaviour
     void MoveCharacter()
     {
         Vector3 movement = Vector3.zero;
+        Vector3 jump = Vector3.zero;
 
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
+        movement.x = Input.GetAxis("Horizontal");
+        movement.z = Input.GetAxis("Vertical");
 
-        movement = new Vector3(moveHorizontal, 0, moveVertical);
+        movement.y = 0;
 
-        if (/*IsGrounded()*/ !offGround && Input.GetKeyDown(KeyCode.Space) )
-        {
-            rb.AddForce(Vector3.up * CalculateJumpVerticalSpeed(), ForceMode.Impulse);
-        }
         
-        rb.AddForce(movement * speed);
+        if ( !offGround && Input.GetAxis("Jump") != 0 )//Input.GetKeyDown(KeyCode.Space) )
+        {
+            jump = Vector3.up;
+            jump = Camera.main.transform.TransformDirection(jump);
+            jump.x = 0;
+            jump.z = 0;
+            Vector3 jumpForce = jump.normalized * jumpHeight;//CalculateJumpVerticalSpeed();
+            rb.AddForce(jumpForce, ForceMode.Impulse);
+
+
+
+            //rb.AddForce(Vector3.up * CalculateJumpVerticalSpeed(), ForceMode.Impulse);
+        }
+
+        movement = Camera.main.transform.TransformDirection(movement);
+        movement.y = 0;
+        Vector3 force = movement.normalized * speed;
+        rb.AddForce(force);
+
+
+
     }
 
     private bool IsGrounded()
