@@ -70,6 +70,7 @@ public class Player : MonoBehaviour
             jump.z = 0;
             Vector3 jumpForce = jump.normalized * jumpHeight;//CalculateJumpVerticalSpeed();
             rb.AddForce(jumpForce, ForceMode.Impulse);
+            rb.drag = 1.0f;
 
 
 
@@ -108,6 +109,7 @@ public class Player : MonoBehaviour
     {
         if (hit.gameObject.layer == 0)
         {
+            rb.drag = 0.5f;
             offGround = false;
         }
     }
