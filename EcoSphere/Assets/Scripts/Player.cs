@@ -86,11 +86,11 @@ public class Player : MonoBehaviour
 
     }
 
-    private bool IsGrounded()
+    /*private bool IsGrounded()
     {
         return Physics.CheckCapsule(col.bounds.center, new Vector3(col.bounds.center.x, col.bounds.min.y,
             col.bounds.center.z), col.radius * 1.0f, groundLayer);
-    }
+    }*/
 
     private float CalculateJumpVerticalSpeed()
     {
@@ -107,8 +107,19 @@ public class Player : MonoBehaviour
     // Detect collision with floor
     void OnCollisionEnter(Collision hit)
     {
-        if (hit.gameObject.layer == 0)
+        if (hit.gameObject.layer == 0 && hit.collider.GetComponent<Renderer>().sharedMaterial.name == "Ground")
         {
+            print("The material I'm touching is " + hit.collider.GetComponent<Renderer>().sharedMaterial.name);
+            rb.drag = 0.5f;
+            offGround = false;
+        }
+    }
+
+    private void OnCollisionStay(Collision hit)
+    {
+        if (hit.gameObject.layer == 0 && hit.collider.GetComponent<Renderer>().sharedMaterial.name == "Ground")
+        {
+            print("The material I'm touching is " + hit.collider.GetComponent<Renderer>().sharedMaterial.name);
             rb.drag = 0.5f;
             offGround = false;
         }
