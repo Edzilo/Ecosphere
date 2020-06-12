@@ -101,7 +101,7 @@ public class Player : MonoBehaviour
 
     private bool isFalling()
     {
-        return transform.position.y <= -1.0f;
+        return transform.position.y <= -2.0f;
     }
 
     // Detect collision with floor
