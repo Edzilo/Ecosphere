@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
 
     public Text checkpointTimes;
 
+    public GameObject endScreen;
+
     public Player player;
 
     public Checkpoint currentCheckpoint;
@@ -70,6 +72,8 @@ public class GameManager : MonoBehaviour
     private void Win()
     {
         print("You won");
+        endScreen.SetActive(true);
+        endScreen.transform.Find("Final time").GetComponent<Text>().text += " " + ComputeTime();
         Time.timeScale = 0.0f;
     }
 
