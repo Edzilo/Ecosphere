@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject naturalLights;
 
+    public List<Material> jumpable;
+
     private float naturalLightsSpeedfactor = 1.0f;
 
     public static GameManager Instance { get { return instance; } }

@@ -74,13 +74,6 @@ public class Player : MonoBehaviour
         rb.AddForce(movementForce);
     }
 
-    private float CalculateJumpVerticalSpeed()
-    {
-        // From the jump height and gravity we deduce the upwards speed 
-        // for the character to reach at the apex.
-        return Mathf.Sqrt(2.0f * jumpHeight * (-1.0f * Physics.gravity.y) );
-    }
-
     private bool isFalling()
     {
         return transform.position.y <= -2.0f;
@@ -99,10 +92,10 @@ public class Player : MonoBehaviour
 
     private void OnCollisionStay(Collision hit)
     {
+        print("The material I'm touching is " + hit.collider.GetComponent<Renderer>().sharedMaterial.name);
 
-        if (hit.gameObject.layer == 0 && hit.collider.GetComponent<Renderer>().sharedMaterial.name != "Falaise")
+        if ( GameManager.Instance.jumpable.Contains(hit.collider.GetComponent<Renderer>().sharedMaterial)) /*hit.collider.GetComponent<Renderer>().sharedMaterial.name != "Falaise"*/
         {
-            print("The material I'm touching is " + hit.collider.GetComponent<Renderer>().sharedMaterial.name);
             rb.drag = 0.5f;
             offGround = false;
         }
