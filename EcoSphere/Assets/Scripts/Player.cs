@@ -15,12 +15,9 @@ public class Player : MonoBehaviour
     public SphereCollider col;
 
     private Rigidbody rb;
-
-    private Vector3 fallBackPosition;
-
     private bool offGround;
 
-    public Vector3 FallBackPosition { get => fallBackPosition; set => fallBackPosition = value; }
+    public Vector3 FallBackPosition { get; set; }
 
     // Start is called before the first frame update
     void Start()
@@ -58,9 +55,7 @@ public class Player : MonoBehaviour
 
         movement.x = Input.GetAxis("Horizontal");
         movement.z = Input.GetAxis("Vertical");
-
         movement.y = 0;
-
         
         if ( !offGround && Input.GetAxis("Jump") != 0 )//Input.GetKeyDown(KeyCode.Space) )
         {
@@ -71,26 +66,13 @@ public class Player : MonoBehaviour
             Vector3 jumpForce = jump.normalized * jumpHeight;//CalculateJumpVerticalSpeed();
             rb.AddForce(jumpForce, ForceMode.Impulse);
             rb.drag = 1.0f;
-
-
-
-            //rb.AddForce(Vector3.up * CalculateJumpVerticalSpeed(), ForceMode.Impulse);
         }
 
         movement = Camera.main.transform.TransformDirection(movement);
         movement.y = 0;
-        Vector3 force = movement.normalized * speed;
-        rb.AddForce(force);
-
-
-
+        Vector3 movementForce = movement.normalized * speed;
+        rb.AddForce(movementForce);
     }
-
-    /*private bool IsGrounded()
-    {
-        return Physics.CheckCapsule(col.bounds.center, new Vector3(col.bounds.center.x, col.bounds.min.y,
-            col.bounds.center.z), col.radius * 1.0f, groundLayer);
-    }*/
 
     private float CalculateJumpVerticalSpeed()
     {
