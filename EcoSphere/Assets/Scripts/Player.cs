@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
     private Rigidbody rb;
     private bool offGround;
 
+    private Vector3 lastGroundPosition;
+
     public Vector3 FallBackPosition { get; set; }
 
     // Start is called before the first frame update
@@ -31,10 +33,20 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isFalling() )
+        float fallDistance = 0.0f;
+        if (offGround)
+        {
+            fallDistance = lastGroundPosition.y - transform.position.y;
+        } else
+        {
+            lastGroundPosition = transform.position;
+        }
+        print("fallDistance " + fallDistance);
+        if (fallDistance >= 2.0f)
         {
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
+            lastGroundPosition = FallBackPosition;
             transform.position = FallBackPosition;
         }
     }
