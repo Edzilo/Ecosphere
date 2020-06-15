@@ -104,7 +104,7 @@ public class Player : MonoBehaviour
         return transform.position.y <= -2.0f;
     }
 
-    // Detect collision with floor
+    /*// Detect collision with floor
     void OnCollisionEnter(Collision hit)
     {
         if (hit.gameObject.layer == 0 && hit.collider.GetComponent<Renderer>().sharedMaterial.name == "Ground")
@@ -113,16 +113,28 @@ public class Player : MonoBehaviour
             rb.drag = 0.5f;
             offGround = false;
         }
-    }
+    }*/
 
     private void OnCollisionStay(Collision hit)
     {
-        if (hit.gameObject.layer == 0 && hit.collider.GetComponent<Renderer>().sharedMaterial.name == "Ground")
+
+        if (hit.gameObject.layer == 0 && hit.collider.GetComponent<Renderer>().sharedMaterial.name != "Falaise")
         {
             print("The material I'm touching is " + hit.collider.GetComponent<Renderer>().sharedMaterial.name);
             rb.drag = 0.5f;
             offGround = false;
         }
+
+
+        /*if (hit.gameObject.layer == 0 && hit.collider.GetComponent<Renderer>().sharedMaterial.name == "Ground")
+        {
+            print("The material I'm touching is " + hit.collider.GetComponent<Renderer>().sharedMaterial.name);
+            rb.drag = 0.5f;
+            offGround = false;
+        } else
+        {
+            print("Else The material I'm touching is " + hit.collider.GetComponent<Renderer>().sharedMaterial.name);
+        }*/
     }
 
     // Detect collision exit with floor
