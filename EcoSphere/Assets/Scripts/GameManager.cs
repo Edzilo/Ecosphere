@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -73,7 +74,7 @@ public class GameManager : MonoBehaviour
     {
         print("You won");
         endScreen.SetActive(true);
-        endScreen.transform.Find("Final time").GetComponent<Text>().text += " " + ComputeTime();
+        endScreen.transform.Find("Final time").GetComponent<TextMeshProUGUI>().text += " " + ComputeTime();
         Time.timeScale = 0.0f;
     }
 
