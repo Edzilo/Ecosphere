@@ -41,7 +41,7 @@ public class Player : MonoBehaviour
         {
             lastGroundPosition = transform.position;
         }
-        print("fallDistance " + fallDistance);
+        //print("fallDistance " + fallDistance);
         if (fallDistance >= 2.0f)
         {
             rb.velocity = Vector3.zero;
