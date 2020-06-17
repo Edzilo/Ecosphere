@@ -10,9 +10,9 @@ public class GameManager : MonoBehaviour
     // Singleton
     private static GameManager instance;
 
-    public Text chronoText;
+    public TextMeshProUGUI chronoText;
 
-    public Text checkpointTimes;
+    public TextMeshProUGUI checkpointTimes;
 
     public GameObject endScreen;
 
