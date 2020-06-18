@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
 
     public float jumpHeight;
 
+    private float offGroundTime;
+
     public LayerMask groundLayer;
 
     public SphereCollider col;
@@ -28,12 +30,44 @@ public class Player : MonoBehaviour
         col = GetComponent<SphereCollider>();
         transform.position = GameManager.Instance.currentCheckpoint.transform.position + new Vector3(0, 0.5f, -1.0f);
         FallBackPosition = transform.position;
+        offGroundTime = 0.0f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        float fallDistance = 0.0f;
+        RaycastHit hit;
+
+        if (offGround)
+        {
+            offGroundTime += Time.deltaTime;
+            if(offGroundTime >= 1.0f && Physics.Raycast(transform.position, -Camera.main.transform.TransformDirection(Vector3.up), out hit)
+                && !GameManager.Instance.jumpable.Contains(hit.collider.GetComponent<Renderer>().sharedMaterial))
+            {
+                rb.velocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
+                lastGroundPosition = FallBackPosition;
+                transform.position = FallBackPosition;
+
+            } else if (Physics.Raycast(transform.position, -Camera.main.transform.TransformDirection(Vector3.up), out hit) && hit.collider.GetComponent<Renderer>() != null
+                && GameManager.Instance.jumpable.Contains(hit.collider.GetComponent<Renderer>().sharedMaterial))
+            {
+                offGroundTime = 0.0f;
+            }
+        } else
+        {
+            offGroundTime = 0.0f;
+        }
+        print("offground time " + offGroundTime);
+
+        /*if (Physics.Raycast(transform.position, -Camera.main.transform.TransformDirection(Vector3.up), out hit))
+        {
+
+            print("Found an object - distance: " + (hit.distance - GetComponent<SphereCollider>().radius) + " of type " + hit.collider.GetComponent<Renderer>().sharedMaterial.name);
+            
+        }*/
+
+        /*float fallDistance = 0.0f;
         if (offGround)
         {
             fallDistance = lastGroundPosition.y - transform.position.y;
@@ -48,7 +82,7 @@ public class Player : MonoBehaviour
             rb.angularVelocity = Vector3.zero;
             lastGroundPosition = FallBackPosition;
             transform.position = FallBackPosition;
-        }
+        }*/
     }
 
     void FixedUpdate()
@@ -104,7 +138,7 @@ public class Player : MonoBehaviour
 
     private void OnCollisionStay(Collision hit)
     {
-        print("The material I'm touching is " + hit.collider.GetComponent<Renderer>().sharedMaterial.name);
+        //print("The material I'm touching is " + hit.collider.GetComponent<Renderer>().sharedMaterial.name);
 
         if ( GameManager.Instance.jumpable.Contains(hit.collider.GetComponent<Renderer>().sharedMaterial)) /*hit.collider.GetComponent<Renderer>().sharedMaterial.name != "Falaise"*/
         {
