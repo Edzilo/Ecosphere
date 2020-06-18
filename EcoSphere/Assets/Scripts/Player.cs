@@ -6,8 +6,6 @@ public class Player : MonoBehaviour
 {
     public float speed;
 
-    //public float maxSpeed;
-
     public float jumpHeight;
 
     private float offGroundTime;
@@ -23,7 +21,6 @@ public class Player : MonoBehaviour
 
     public Vector3 FallBackPosition { get; set; }
 
-    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -33,7 +30,6 @@ public class Player : MonoBehaviour
         offGroundTime = 0.0f;
     }
 
-    // Update is called once per frame
     void Update()
     {
         RaycastHit hit;
@@ -59,30 +55,6 @@ public class Player : MonoBehaviour
             offGroundTime = 0.0f;
         }
         print("offground time " + offGroundTime);
-
-        /*if (Physics.Raycast(transform.position, -Camera.main.transform.TransformDirection(Vector3.up), out hit))
-        {
-
-            print("Found an object - distance: " + (hit.distance - GetComponent<SphereCollider>().radius) + " of type " + hit.collider.GetComponent<Renderer>().sharedMaterial.name);
-            
-        }*/
-
-        /*float fallDistance = 0.0f;
-        if (offGround)
-        {
-            fallDistance = lastGroundPosition.y - transform.position.y;
-        } else
-        {
-            lastGroundPosition = transform.position;
-        }
-        //print("fallDistance " + fallDistance);
-        if (fallDistance >= 2.0f)
-        {
-            rb.velocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
-            lastGroundPosition = FallBackPosition;
-            transform.position = FallBackPosition;
-        }*/
     }
 
     void FixedUpdate()
@@ -103,13 +75,13 @@ public class Player : MonoBehaviour
         movement.z = Input.GetAxis("Vertical");
         movement.y = 0;
         
-        if ( !offGround && Input.GetAxis("Jump") != 0 )//Input.GetKeyDown(KeyCode.Space) )
+        if ( !offGround && Input.GetAxis("Jump") != 0 )
         {
             jump = Vector3.up;
             jump = Camera.main.transform.TransformDirection(jump);
             jump.x = 0;
             jump.z = 0;
-            Vector3 jumpForce = jump.normalized * jumpHeight;//CalculateJumpVerticalSpeed();
+            Vector3 jumpForce = jump.normalized * jumpHeight;
             rb.AddForce(jumpForce, ForceMode.Impulse);
             rb.drag = 1.0f;
         }
@@ -125,40 +97,15 @@ public class Player : MonoBehaviour
         return transform.position.y <= -2.0f;
     }
 
-    /*// Detect collision with floor
-    void OnCollisionEnter(Collision hit)
-    {
-        if (hit.gameObject.layer == 0 && hit.collider.GetComponent<Renderer>().sharedMaterial.name == "Ground")
-        {
-            print("The material I'm touching is " + hit.collider.GetComponent<Renderer>().sharedMaterial.name);
-            rb.drag = 0.5f;
-            offGround = false;
-        }
-    }*/
-
     private void OnCollisionStay(Collision hit)
     {
-        //print("The material I'm touching is " + hit.collider.GetComponent<Renderer>().sharedMaterial.name);
-
-        if ( GameManager.Instance.jumpable.Contains(hit.collider.GetComponent<Renderer>().sharedMaterial)) /*hit.collider.GetComponent<Renderer>().sharedMaterial.name != "Falaise"*/
+        if ( GameManager.Instance.jumpable.Contains(hit.collider.GetComponent<Renderer>().sharedMaterial))
         {
             rb.drag = 0.5f;
             offGround = false;
         }
-
-
-        /*if (hit.gameObject.layer == 0 && hit.collider.GetComponent<Renderer>().sharedMaterial.name == "Ground")
-        {
-            print("The material I'm touching is " + hit.collider.GetComponent<Renderer>().sharedMaterial.name);
-            rb.drag = 0.5f;
-            offGround = false;
-        } else
-        {
-            print("Else The material I'm touching is " + hit.collider.GetComponent<Renderer>().sharedMaterial.name);
-        }*/
     }
 
-    // Detect collision exit with floor
     void OnCollisionExit(Collision hit)
     {
         if (hit.gameObject.layer == 0)

@@ -6,10 +6,6 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-
-    // Singleton
-    private static GameManager instance;
-
     public TextMeshProUGUI chronoText;
 
     public TextMeshProUGUI checkpointTimes;
@@ -26,7 +22,7 @@ public class GameManager : MonoBehaviour
 
     private float naturalLightsSpeedfactor = 1.0f;
 
-    public static GameManager Instance { get { return instance; } }
+    public static GameManager Instance { get; private set; }
 
     public Checkpoint CurrentCheckpoint { get => currentCheckpoint;
         set
@@ -47,13 +43,13 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (instance != null && instance != this)
+        if (Instance != null && Instance != this)
         {
             Destroy(this.gameObject);
         }
         else
         {
-            instance = this;
+            Instance = this;
         }
     }
 
@@ -80,7 +76,6 @@ public class GameManager : MonoBehaviour
 
     private string ComputeTime()
     {
-        //int hours = (int)Time.time / 3600;
         int minutes = (int)(Time.time % 3600) / 60;
         int seconds = (int)(Time.time % 3600) % 60;
         return "" + minutes + ":" + seconds + ":" + System.Math.Round((( Time.time - (int) Time.time) * 100),0);
