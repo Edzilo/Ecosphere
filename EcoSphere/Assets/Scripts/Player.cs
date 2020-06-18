@@ -42,7 +42,7 @@ public class Player : MonoBehaviour
         {
             offGroundTime += Time.deltaTime;
             if(offGroundTime >= 1.0f && Physics.Raycast(transform.position, -Camera.main.transform.TransformDirection(Vector3.up), out hit)
-                && !GameManager.Instance.jumpable.Contains(hit.collider.GetComponent<Renderer>().sharedMaterial))
+                && hit.collider.GetComponent<Renderer>() != null && !GameManager.Instance.jumpable.Contains(hit.collider.GetComponent<Renderer>().sharedMaterial))
             {
                 rb.velocity = Vector3.zero;
                 rb.angularVelocity = Vector3.zero;
