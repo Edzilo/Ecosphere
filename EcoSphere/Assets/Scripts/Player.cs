@@ -8,6 +8,12 @@ public class Player : MonoBehaviour
 
     public float jumpHeight;
 
+    public float jumpCD; // en secondes
+
+    private bool jumpReloading = false;
+
+    private float currentJumpCD;// en secondes
+
     private float offGroundTime;
 
     public LayerMask groundLayer;
@@ -34,6 +40,16 @@ public class Player : MonoBehaviour
     {
         RaycastHit hit;
 
+        if (jumpReloading)
+        {
+            currentJumpCD += (float)(Time.deltaTime % 3600) % 60;
+            jumpReloading = (currentJumpCD < jumpCD);
+            if (!jumpReloading)
+            {
+                currentJumpCD = 0.0f;
+            }
+        }
+
         if (offGround)
         {
             offGroundTime += Time.deltaTime;
@@ -54,7 +70,7 @@ public class Player : MonoBehaviour
         {
             offGroundTime = 0.0f;
         }
-        print("offground time " + offGroundTime);
+        //print("offground time " + offGroundTime);
     }
 
     void FixedUpdate()
@@ -74,9 +90,10 @@ public class Player : MonoBehaviour
         movement.x = Input.GetAxis("Horizontal");
         movement.z = Input.GetAxis("Vertical");
         movement.y = 0;
-        
-        if ( !offGround && Input.GetAxis("Jump") != 0 )
+
+        if (!offGround && Input.GetAxis("Jump") != 0 && !jumpReloading)
         {
+            jumpReloading = true;
             jump = Vector3.up;
             jump = Camera.main.transform.TransformDirection(jump);
             jump.x = 0;
