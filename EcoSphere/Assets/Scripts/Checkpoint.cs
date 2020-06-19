@@ -35,7 +35,6 @@ public class Checkpoint : MonoBehaviour
                     GameManager.Instance.CurrentCheckpoint = this;
                     model_off.SetActive(false);
                     model_on.SetActive(true);
-
                 }
             } else
             {
