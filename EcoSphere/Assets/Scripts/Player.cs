@@ -101,13 +101,18 @@ public class Player : MonoBehaviour
             jump.z = 0;
             Vector3 jumpForce = jump.normalized * jumpHeight;
             rb.AddForce(jumpForce, ForceMode.Impulse);
-            rb.drag = 5.0f;
+            rb.drag = 1.5f;
         }
 
         movement = Camera.main.transform.TransformDirection(movement);
         movement.y = 0;
         Vector3 movementForce = movement.normalized * speed;
         rb.AddForce(movementForce);
+    }
+
+    private bool isFalling()
+    {
+        return transform.position.y <= -2.0f;
     }
 
     private void OnCollisionStay(Collision hit)
