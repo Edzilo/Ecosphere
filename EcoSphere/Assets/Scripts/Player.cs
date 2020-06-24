@@ -53,8 +53,8 @@ public class Player : MonoBehaviour
         if (offGround)
         {
             offGroundTime += Time.deltaTime;
-            if(offGroundTime >= 1.0f && Physics.Raycast(transform.position, -Camera.main.transform.TransformDirection(Vector3.up), out hit)
-                && hit.distance >=2.0f && hit.collider.GetComponent<Renderer>() != null && !GameManager.Instance.jumpable.Contains(hit.collider.GetComponent<Renderer>().sharedMaterial))
+            if(offGroundTime >= 1.5f && Physics.Raycast(transform.position, -Camera.main.transform.TransformDirection(Vector3.up), out hit)
+                && hit.distance >= 2.0f && hit.collider.GetComponent<Renderer>() != null && !GameManager.Instance.jumpable.Contains(hit.collider.GetComponent<Renderer>().sharedMaterial))
             {
                 print("the distance was " + hit.distance);
                 rb.velocity = Vector3.zero;
