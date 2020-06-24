@@ -53,14 +53,12 @@ public class Player : MonoBehaviour
         if (offGround)
         {
             offGroundTime += Time.deltaTime;
-            if(offGroundTime >= 1.5f && Physics.Raycast(transform.position, -Camera.main.transform.TransformDirection(Vector3.up), out hit)
+            if(offGroundTime >= 2.0f && Physics.Raycast(transform.position, -Camera.main.transform.TransformDirection(Vector3.up), out hit)
                 && hit.distance >= 2.0f && hit.collider.GetComponent<Renderer>() != null && !GameManager.Instance.jumpable.Contains(hit.collider.GetComponent<Renderer>().sharedMaterial))
             {
                 print("the distance was " + hit.distance);
-                rb.velocity = Vector3.zero;
-                rb.angularVelocity = Vector3.zero;
-                lastGroundPosition = FallBackPosition;
-                transform.position = FallBackPosition;
+                FallBack();
+
 
             } else if (Physics.Raycast(transform.position, -Camera.main.transform.TransformDirection(Vector3.up), out hit) && hit.collider.GetComponent<Renderer>() != null
                 && GameManager.Instance.jumpable.Contains(hit.collider.GetComponent<Renderer>().sharedMaterial))
@@ -122,6 +120,11 @@ public class Player : MonoBehaviour
             rb.drag = 0.5f;
             offGround = false;
         }
+
+        if (hit.collider.GetComponent<Renderer>().sharedMaterial.name == "background")
+        {
+            FallBack();
+        }
     }
 
     void OnCollisionExit(Collision hit)
@@ -130,5 +133,13 @@ public class Player : MonoBehaviour
         {
             offGround = true;
         }
+    }
+
+    void FallBack()
+    {
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        lastGroundPosition = FallBackPosition;
+        transform.position = FallBackPosition;
     }
 }
