@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
 
     private float naturalLightsSpeedfactor = 1.0f;
 
+    private float runTime = 0.0f;
+
     public static GameManager Instance { get; private set; }
 
     public Checkpoint CurrentCheckpoint { get => currentCheckpoint;
@@ -55,6 +57,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        runTime = 0.0f;
         CurrentCheckpoint.Activated = true;
         player.FallBackPosition = CurrentCheckpoint.transform.position + new Vector3(0, 0.5f, -1.0f);
         chronoText.text = ComputeTime();
@@ -62,6 +65,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        runTime += Time.deltaTime;
         chronoText.text = ComputeTime();
         updateNaturalLights();
     }
@@ -76,9 +80,9 @@ public class GameManager : MonoBehaviour
 
     private string ComputeTime()
     {
-        int minutes = (int)(Time.time % 3600) / 60;
-        int seconds = (int)(Time.time % 3600) % 60;
-        return "" + minutes + ":" + seconds + ":" + System.Math.Round((( Time.time - (int) Time.time) * 100),0);
+        int minutes = (int)(runTime % 3600) / 60;
+        int seconds = (int)(runTime % 3600) % 60;
+        return "" + minutes + ":" + seconds + ":" + System.Math.Round(((runTime - (int) runTime) * 100),0);
     }
 
     private void updateNaturalLights()
