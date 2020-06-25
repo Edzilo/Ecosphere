@@ -38,6 +38,12 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+
+        if (Input.GetAxis("Restart") != 0)
+        {
+            print("Restart pressed");
+            FallBack();
+        }
         RaycastHit hit;
 
         if (jumpReloading)
