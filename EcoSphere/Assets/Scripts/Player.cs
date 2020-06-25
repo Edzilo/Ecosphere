@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
 
     private bool jumpReloading = false;
 
-    private float currentJumpCD;// en secondes
+    private float currentJumpCD; // en secondes
 
     private float offGroundTime;
 
@@ -41,11 +41,9 @@ public class Player : MonoBehaviour
     {
         if (Input.GetAxis("Restart") != 0)
         {
-            print("Restart pressed");
             FallBack();
         }
         RaycastHit hit;
-
         if (jumpReloading)
         {
             currentJumpCD += (float)(Time.deltaTime % 3600) % 60;
@@ -55,7 +53,6 @@ public class Player : MonoBehaviour
                 currentJumpCD = 0.0f;
             }
         }
-
         if (offGround)
         {
             offGroundTime += Time.deltaTime;
@@ -64,10 +61,7 @@ public class Player : MonoBehaviour
                 && hit.distance >= 2.0f && hit.collider.GetComponent<Renderer>() != null 
                 && !GameManager.Instance.jumpable.Contains(hit.collider.GetComponent<Renderer>().sharedMaterial))
             {
-                print("the distance was " + hit.distance);
                 FallBack();
-
-
             } else if (Physics.Raycast(transform.position, -Camera.main.transform.TransformDirection(Vector3.up), out hit) 
                 && hit.collider.GetComponent<Renderer>() != null
                 && GameManager.Instance.jumpable.Contains(hit.collider.GetComponent<Renderer>().sharedMaterial))
@@ -78,7 +72,6 @@ public class Player : MonoBehaviour
         {
             offGroundTime = 0.0f;
         }
-        //print("offground time " + offGroundTime);
     }
 
     void FixedUpdate()
@@ -110,16 +103,10 @@ public class Player : MonoBehaviour
             rb.AddForce(jumpForce, ForceMode.Impulse);
             rb.drag = 1.5f;
         }
-
         movement = Camera.main.transform.TransformDirection(movement);
         movement.y = 0;
         Vector3 movementForce = movement.normalized * speed;
         rb.AddForce(movementForce);
-    }
-
-    private bool isFalling()
-    {
-        return transform.position.y <= -2.0f;
     }
 
     private void OnCollisionStay(Collision hit)
@@ -129,7 +116,6 @@ public class Player : MonoBehaviour
             rb.drag = 0.5f;
             offGround = false;
         }
-
         if (hit.collider.GetComponent<Renderer>().sharedMaterial.name == "background")
         {
             FallBack();
