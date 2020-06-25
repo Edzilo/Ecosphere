@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
     public SphereCollider col;
 
     private Rigidbody rb;
+
     private bool offGround;
 
     private Vector3 lastGroundPosition;
@@ -38,7 +39,6 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-
         if (Input.GetAxis("Restart") != 0)
         {
             print("Restart pressed");
@@ -59,14 +59,17 @@ public class Player : MonoBehaviour
         if (offGround)
         {
             offGroundTime += Time.deltaTime;
-            if(offGroundTime >= 2.0f && Physics.Raycast(transform.position, -Camera.main.transform.TransformDirection(Vector3.up), out hit)
-                && hit.distance >= 2.0f && hit.collider.GetComponent<Renderer>() != null && !GameManager.Instance.jumpable.Contains(hit.collider.GetComponent<Renderer>().sharedMaterial))
+            if(offGroundTime >= 2.0f 
+                && Physics.Raycast(transform.position, -Camera.main.transform.TransformDirection(Vector3.up), out hit)
+                && hit.distance >= 2.0f && hit.collider.GetComponent<Renderer>() != null 
+                && !GameManager.Instance.jumpable.Contains(hit.collider.GetComponent<Renderer>().sharedMaterial))
             {
                 print("the distance was " + hit.distance);
                 FallBack();
 
 
-            } else if (Physics.Raycast(transform.position, -Camera.main.transform.TransformDirection(Vector3.up), out hit) && hit.collider.GetComponent<Renderer>() != null
+            } else if (Physics.Raycast(transform.position, -Camera.main.transform.TransformDirection(Vector3.up), out hit) 
+                && hit.collider.GetComponent<Renderer>() != null
                 && GameManager.Instance.jumpable.Contains(hit.collider.GetComponent<Renderer>().sharedMaterial))
             {
                 offGroundTime = 0.0f;
