@@ -3728,17 +3728,17 @@ PrefabInstance:
     - target: {fileID: 7873719797054198564, guid: 695c4e2f6ba161a4eba23164c8207a4f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 173.09
+      value: 183.913
       objectReference: {fileID: 0}
     - target: {fileID: 7873719797054198564, guid: 695c4e2f6ba161a4eba23164c8207a4f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -24.15
+      value: -24.693
       objectReference: {fileID: 0}
     - target: {fileID: 7873719797054198564, guid: 695c4e2f6ba161a4eba23164c8207a4f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -58.61
+      value: -62.308
       objectReference: {fileID: 0}
     - target: {fileID: 7873719797054198564, guid: 695c4e2f6ba161a4eba23164c8207a4f,
         type: 3}
@@ -4096,7 +4096,7 @@ MonoBehaviour:
   checkpointTimes: {fileID: 373484666}
   endScreen: {fileID: 2122331602}
   player: {fileID: 1341628351}
-  currentCheckpoint: {fileID: 550476394}
+  currentCheckpoint: {fileID: 49294405}
   naturalLights: {fileID: 1647648205}
   jumpable:
   - {fileID: 6795462705980167066, guid: 2a67fdf4721e8444d9724f21ad3ecc77, type: 3}
