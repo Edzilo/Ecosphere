@@ -6,6 +6,8 @@ public class Player : MonoBehaviour
 {
     public float speed;
 
+    public float drag; //[0.0 , 1.0];
+
     public float jumpHeight;
 
     public float jumpCD; // en secondes
@@ -55,6 +57,12 @@ public class Player : MonoBehaviour
         }
         if (offGround)
         {
+            //TODO remplacer par un drag 'maison" pour éviter un ralentissement en y (vers le bas)
+            Vector3 vel = rb.velocity;
+            vel.x *= drag;
+            vel.z *= drag;
+            rb.velocity = vel;
+            //rb.drag = 1.5f;
             offGroundTime += Time.deltaTime;
             if(offGroundTime >= 2.0f 
                 && Physics.Raycast(transform.position, -Camera.main.transform.TransformDirection(Vector3.up), out hit)
@@ -101,7 +109,7 @@ public class Player : MonoBehaviour
             jump.z = 0;
             Vector3 jumpForce = jump.normalized * jumpHeight;
             rb.AddForce(jumpForce, ForceMode.Impulse);
-            rb.drag = 12.5f;
+            //rb.drag = 12.5f;
         }
         movement = Camera.main.transform.TransformDirection(movement);
         movement.y = 0;

@@ -4610,7 +4610,7 @@ MonoBehaviour:
   checkpointTimes: {fileID: 373484666}
   endScreen: {fileID: 2122331602}
   player: {fileID: 1341628351}
-  currentCheckpoint: {fileID: 1880960399}
+  currentCheckpoint: {fileID: 793033415}
   naturalLights: {fileID: 1647648205}
   jumpable:
   - {fileID: 6795462705980167066, guid: 2a67fdf4721e8444d9724f21ad3ecc77, type: 3}
@@ -5749,6 +5749,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 17.5
+  drag: 0.5
   jumpHeight: 7.5
   jumpCD: 0.5
   groundLayer:
