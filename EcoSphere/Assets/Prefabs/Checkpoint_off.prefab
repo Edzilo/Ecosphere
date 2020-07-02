@@ -90,7 +90,7 @@ BoxCollider:
   m_GameObject: {fileID: 766525731221655552}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.005456655, y: 0.0145435715, z: 0.0052756756}
   m_Center: {x: 0, y: 0.0027727424, z: 2.980232e-10}
@@ -112,3 +112,6 @@ MonoBehaviour:
   model_off: {fileID: 4128318230600475118, guid: 49e8c4c9a6c29cc4691c2e8d7cac0bd3,
     type: 3}
   range: {fileID: 0}
+  audioSource: {fileID: 0}
+  clip: {fileID: 0}
+  volume: 0.5
