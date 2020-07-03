@@ -25,6 +25,8 @@ public class Player : MonoBehaviour
     private Rigidbody rb;
 
     private bool offGround;
+    public bool OffGround { get => offGround; set => offGround = value; }
+
 
     private Vector3 lastGroundPosition;
 
@@ -55,7 +57,7 @@ public class Player : MonoBehaviour
                 currentJumpCD = 0.0f;
             }
         }
-        if (offGround)
+        if (OffGround)
         {
             //TODO remplacer par un drag 'maison" pour éviter un ralentissement en y (vers le bas)
             Vector3 vel = rb.velocity;
@@ -100,7 +102,7 @@ public class Player : MonoBehaviour
         movement.z = Input.GetAxis("Vertical");
         movement.y = 0;
 
-        if (!offGround && Input.GetAxis("Jump") != 0 && !jumpReloading)
+        if (!OffGround && Input.GetAxis("Jump") != 0 && !jumpReloading)
         {
             jumpReloading = true;
             jump = Vector3.up;
@@ -122,7 +124,7 @@ public class Player : MonoBehaviour
         if ( GameManager.Instance.jumpable.Contains(hit.collider.GetComponent<Renderer>().sharedMaterial))
         {
             rb.drag = 0.5f;
-            offGround = false;
+            OffGround = false;
         }
         if (hit.collider.GetComponent<Renderer>().sharedMaterial.name == "background")
         {
@@ -134,7 +136,7 @@ public class Player : MonoBehaviour
     {
         if (hit.gameObject.layer == 0)
         {
-            offGround = true;
+            OffGround = true;
         }
     }
 

@@ -2,8 +2,11 @@
 
 public class Range : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        transform.parent.GetComponent<Checkpoint>().EnterInRange(this);
+        if (other.GetComponent<Player>() != null && !other.GetComponent<Player>().OffGround)
+        {
+            transform.parent.GetComponent<Checkpoint>().EnterInRange(this);
+        }
     }
 }
