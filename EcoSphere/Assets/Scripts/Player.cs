@@ -47,6 +47,7 @@ public class Player : MonoBehaviour
         {
             FallBack();
         }
+
         RaycastHit hit;
         if (jumpReloading)
         {
@@ -57,14 +58,14 @@ public class Player : MonoBehaviour
                 currentJumpCD = 0.0f;
             }
         }
+
         if (OffGround)
         {
-            //TODO remplacer par un drag 'maison" pour éviter un ralentissement en y (vers le bas)
             Vector3 vel = rb.velocity;
             vel.x *= drag;
             vel.z *= drag;
             rb.velocity = vel;
-            //rb.drag = 1.5f;
+
             offGroundTime += Time.deltaTime;
             if(offGroundTime >= 2.0f 
                 && Physics.Raycast(transform.position, -Camera.main.transform.TransformDirection(Vector3.up), out hit)
@@ -72,9 +73,7 @@ public class Player : MonoBehaviour
                 && !GameManager.Instance.jumpable.Contains(hit.collider.GetComponent<Renderer>().sharedMaterial))
             {
                 FallBack();
-            } else if (Physics.Raycast(transform.position, -Camera.main.transform.TransformDirection(Vector3.up), out hit) 
-                && hit.collider.GetComponent<Renderer>() != null
-                && GameManager.Instance.jumpable.Contains(hit.collider.GetComponent<Renderer>().sharedMaterial))
+            } else if (IsAboveJumpable())
             {
                 offGroundTime = 0.0f;
             }
@@ -146,5 +145,13 @@ public class Player : MonoBehaviour
         rb.angularVelocity = Vector3.zero;
         lastGroundPosition = FallBackPosition;
         transform.position = FallBackPosition;
+    }
+
+    public bool IsAboveJumpable()
+    {
+        RaycastHit hit;
+        return Physics.Raycast(transform.position, -Camera.main.transform.TransformDirection(Vector3.up), out hit)
+                && hit.collider.GetComponent<Renderer>() != null
+                && GameManager.Instance.jumpable.Contains(hit.collider.GetComponent<Renderer>().sharedMaterial);
     }
 }
