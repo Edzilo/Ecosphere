@@ -1418,7 +1418,7 @@ GameObject:
   - component: {fileID: 244856089}
   - component: {fileID: 244856090}
   m_Layer: 0
-  m_Name: Blurred
+  m_Name: Blurred Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
