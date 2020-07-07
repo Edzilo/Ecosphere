@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -102,6 +103,13 @@ public class GameManager : MonoBehaviour
         print("You won");
         endScreen.SetActive(true);
         endScreen.transform.Find("Final time").GetComponent<TextMeshProUGUI>().text += " " + ComputeTime();
+        /*EventSystem.current.SetSelectedGameObject(null);
+        Button button = endScreen.GetComponentInChildren<Button>();
+        if (button != null)
+        {
+            print("I select " + button);
+            button.Select();
+        }*/
         Time.timeScale = 0.0f;
     }
 
