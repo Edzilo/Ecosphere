@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject endScreen;
 
+    public GameObject menu;
+
     public Player player;
 
     public Checkpoint currentCheckpoint;
@@ -23,6 +25,8 @@ public class GameManager : MonoBehaviour
     private float naturalLightsSpeedfactor = 1.0f;
 
     private float runTime = 0.0f;
+
+    private bool escapeStickDownLast = false;
 
     public static GameManager Instance { get; private set; }
 
@@ -68,6 +72,29 @@ public class GameManager : MonoBehaviour
         runTime += Time.deltaTime;
         chronoText.text = ComputeTime();
         updateNaturalLights();
+
+        if (Input.GetAxis("Escape") != 0)
+        {
+            //print("escape pressed");
+            if (!escapeStickDownLast)
+            {
+                if (Time.timeScale == 0.0f)
+                {
+                    ResumeGame();
+                }
+                else
+                {
+                    PauseGame();
+                }
+            }
+
+            escapeStickDownLast = true;
+        }
+        else
+        {
+            escapeStickDownLast = false;
+        }
+        
     }
 
     private void Win()
@@ -109,6 +136,18 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0.0f;
+        menu.SetActive(true);
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1.0f;
+        menu.SetActive(false);
     }
 
 }
