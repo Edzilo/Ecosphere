@@ -111,7 +111,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetAxis("Jump") != 0)
         {
-            if (!OffGround  /*&& !jumpReloading*/ && !GameManager.Instance.submitStickDownLast)
+            if (!OffGround  /*&& !jumpReloading*/ && !GameManager.Instance.submitStickDownLast && !jumpStickDownLast)
             {
 
                 jumpStickDownLast = true;
