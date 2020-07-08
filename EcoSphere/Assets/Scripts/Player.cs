@@ -10,15 +10,17 @@ public class Player : MonoBehaviour
 
     public float jumpHeight;
 
-    public float jumpCD; // en secondes
+    //public float jumpCD; // en secondes
 
     public SphereCollider col;
 
-    private bool jumpReloading = false;
+    //private bool jumpReloading = false;
 
     private Vector3 savedVelocity;
 
-    private float currentJumpCD; // en secondes
+    //private float currentJumpCD; // en secondes
+
+    private bool jumpStickDownLast = false;
 
     private float offGroundTime;
 
@@ -51,7 +53,7 @@ public class Player : MonoBehaviour
         }
 
         RaycastHit hit;
-        if (jumpReloading)
+       /* if (jumpReloading)
         {
             currentJumpCD += (float)(Time.deltaTime % 3600) % 60;
             jumpReloading = (currentJumpCD < jumpCD);
@@ -59,7 +61,7 @@ public class Player : MonoBehaviour
             {
                 currentJumpCD = 0.0f;
             }
-        }
+        }*/
 
         if (OffGround)
         {
@@ -107,16 +109,27 @@ public class Player : MonoBehaviour
         movement.z = Input.GetAxis("Vertical");
         movement.y = 0;
 
-        if (!OffGround && Input.GetAxis("Jump") != 0 && !jumpReloading)
+        if (Input.GetAxis("Jump") != 0)
         {
-            jumpReloading = true;
-            jump = Vector3.up;
-            jump = Camera.main.transform.TransformDirection(jump);
-            jump.x = 0;
-            jump.z = 0;
-            Vector3 jumpForce = jump.normalized * jumpHeight;
-            rb.AddForce(jumpForce, ForceMode.Impulse);
+            if (!OffGround  /*&& !jumpReloading*/ && !GameManager.Instance.submitStickDownLast)
+            {
+
+                jumpStickDownLast = true;
+                //jumpReloading = true;
+                jump = Vector3.up;
+                jump = Camera.main.transform.TransformDirection(jump);
+                jump.x = 0;
+                jump.z = 0;
+                Vector3 jumpForce = jump.normalized * jumpHeight;
+                rb.AddForce(jumpForce, ForceMode.Impulse);
+            }
+            jumpStickDownLast = true;
         }
+        else
+        {
+            jumpStickDownLast = false;
+        }
+       
         movement = Camera.main.transform.TransformDirection(movement);
         movement.y = 0;
         Vector3 movementForce = movement.normalized * speed;

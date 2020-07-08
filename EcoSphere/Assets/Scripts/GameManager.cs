@@ -32,6 +32,8 @@ public class GameManager : MonoBehaviour
 
     private bool escapeStickDownLast = false;
 
+    public bool submitStickDownLast = false;
+
     public static GameManager Instance { get; private set; }
 
     public Checkpoint CurrentCheckpoint { get => currentCheckpoint;
@@ -101,7 +103,17 @@ public class GameManager : MonoBehaviour
         {
             escapeStickDownLast = false;
         }
-        
+
+        //TODO cleanup
+        if (Input.GetAxis("Submit") != 0)
+        {
+            submitStickDownLast = true;
+        }
+        else
+        {
+            submitStickDownLast = false;
+        }
+
     }
 
     private void Win()
