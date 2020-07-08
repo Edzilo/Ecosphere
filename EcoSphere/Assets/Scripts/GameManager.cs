@@ -109,7 +109,7 @@ public class GameManager : MonoBehaviour
         print("You won");
         endScreen.SetActive(true);
         endScreen.transform.Find("Final time").GetComponent<TextMeshProUGUI>().text += " " + ComputeTime();
-        gamePaused = true;
+        PauseGame();
     }
 
     private string ComputeTime()
