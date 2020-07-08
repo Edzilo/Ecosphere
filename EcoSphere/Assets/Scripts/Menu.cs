@@ -25,7 +25,6 @@ public class Menu : MonoBehaviour
         Button button = GetComponentInChildren<Button>();
         if (button != null)
         {
-            print("I select " + button);
             button.Select();
         }
     }
@@ -34,14 +33,11 @@ public class Menu : MonoBehaviour
     {
         for (int i = 0; i < transform.childCount; ++i)
         {
-            print("For loop: " + transform.GetChild(i));
             if (transform.GetChild(i).GetComponent<Button>() != null)
             {
                 return transform.GetChild(i).gameObject.GetComponent<Button>();
             }
         }
-
         return null;
-
     }
 }
