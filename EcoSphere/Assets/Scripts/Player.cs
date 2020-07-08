@@ -12,7 +12,11 @@ public class Player : MonoBehaviour
 
     public float jumpCD; // en secondes
 
+    public SphereCollider col;
+
     private bool jumpReloading = false;
+
+    private Vector3 savedVelocity;
 
     private float currentJumpCD; // en secondes
 
@@ -20,9 +24,7 @@ public class Player : MonoBehaviour
 
     public LayerMask groundLayer;
 
-    public SphereCollider col;
-
-    private Rigidbody rb;
+    public Rigidbody rb;
 
     private bool offGround;
     public bool OffGround { get => offGround; set => offGround = value; }
@@ -43,7 +45,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetAxis("Restart") != 0)
+        if (Input.GetAxis("Restart") != 0 && !GameManager.Instance.IsPaused())
         {
             FallBack();
         }
@@ -85,7 +87,11 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        MoveCharacter();
+        if (!GameManager.Instance.IsPaused())
+        {
+
+            MoveCharacter();
+        } 
         if (rb.velocity.magnitude > speed)
         {
             rb.velocity = rb.velocity.normalized * speed;
@@ -110,7 +116,6 @@ public class Player : MonoBehaviour
             jump.z = 0;
             Vector3 jumpForce = jump.normalized * jumpHeight;
             rb.AddForce(jumpForce, ForceMode.Impulse);
-            //rb.drag = 12.5f;
         }
         movement = Camera.main.transform.TransformDirection(movement);
         movement.y = 0;
@@ -153,5 +158,15 @@ public class Player : MonoBehaviour
         return Physics.Raycast(transform.position, -Camera.main.transform.TransformDirection(Vector3.up), out hit)
                 && hit.collider.GetComponent<Renderer>() != null
                 && GameManager.Instance.jumpable.Contains(hit.collider.GetComponent<Renderer>().sharedMaterial);
+    }
+
+    public void SaveVelocity()
+    {
+        savedVelocity = rb.velocity;
+    }
+
+    public void RecoverVelocity()
+    {
+        rb.velocity = savedVelocity;
     }
 }

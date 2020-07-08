@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+
     public TextMeshProUGUI chronoText;
 
     public TextMeshProUGUI checkpointTimes;
@@ -26,6 +27,8 @@ public class GameManager : MonoBehaviour
     private float naturalLightsSpeedfactor = 1.0f;
 
     private float runTime = 0.0f;
+
+    private bool gamePaused;
 
     private bool escapeStickDownLast = false;
 
@@ -70,16 +73,19 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        runTime += Time.deltaTime;
-        chronoText.text = ComputeTime();
-        updateNaturalLights();
+        if (!gamePaused)
+        {
+            runTime += Time.deltaTime;
+            chronoText.text = ComputeTime();
+            updateNaturalLights();
+        }
 
         if (Input.GetAxis("Escape") != 0)
         {
-            //print("escape pressed");
             if (!escapeStickDownLast)
             {
-                if (Time.timeScale == 0.0f)
+                print("start " + Time.time);
+                if (gamePaused)
                 {
                     ResumeGame();
                 }
@@ -87,8 +93,8 @@ public class GameManager : MonoBehaviour
                 {
                     PauseGame();
                 }
+                
             }
-
             escapeStickDownLast = true;
         }
         else
@@ -103,14 +109,7 @@ public class GameManager : MonoBehaviour
         print("You won");
         endScreen.SetActive(true);
         endScreen.transform.Find("Final time").GetComponent<TextMeshProUGUI>().text += " " + ComputeTime();
-        /*EventSystem.current.SetSelectedGameObject(null);
-        Button button = endScreen.GetComponentInChildren<Button>();
-        if (button != null)
-        {
-            print("I select " + button);
-            button.Select();
-        }*/
-        Time.timeScale = 0.0f;
+        gamePaused = true;
     }
 
     private string ComputeTime()
@@ -148,14 +147,23 @@ public class GameManager : MonoBehaviour
 
     public void PauseGame()
     {
-        Time.timeScale = 0.0f;
+        player.SaveVelocity();
+        player.rb.isKinematic = true;
+        gamePaused = true;
         menu.SetActive(true);
     }
 
     public void ResumeGame()
     {
-        Time.timeScale = 1.0f;
+        player.rb.isKinematic = false;
+        player.RecoverVelocity();
+        gamePaused = false;
         menu.SetActive(false);
+    }
+
+    public bool IsPaused()
+    {
+        return gamePaused;
     }
 
 }
