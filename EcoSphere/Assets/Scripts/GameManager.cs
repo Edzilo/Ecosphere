@@ -121,7 +121,9 @@ public class GameManager : MonoBehaviour
         print("You won");
         endScreen.SetActive(true);
         endScreen.transform.Find("Final time").GetComponent<TextMeshProUGUI>().text += " " + ComputeTime();
-        PauseGame();
+        player.SaveVelocity();
+        player.rb.isKinematic = true;
+        gamePaused = true;
     }
 
     private string ComputeTime()
