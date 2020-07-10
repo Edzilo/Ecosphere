@@ -180,4 +180,9 @@ public class GameManager : MonoBehaviour
         return gamePaused;
     }
 
+    public bool LeavingPause()
+    {
+        return !submitStickDownLast && !gamePaused;
+    }
+
 }

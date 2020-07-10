@@ -7655,6 +7655,7 @@ MonoBehaviour:
   speed: 17.5
   drag: 0.995
   jumpHeight: 5.5
+  jumpCD: 0.2
   col: {fileID: 1341628346}
   groundLayer:
     serializedVersion: 2
