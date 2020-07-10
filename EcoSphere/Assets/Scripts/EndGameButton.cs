@@ -21,5 +21,10 @@ public class EndGameButton : MonoBehaviour
         GameManager.Instance.ResumeGame();
     }
 
+    public void MainMenu()
+    {
+        SceneManager.LoadSceneAsync("Main Menu");
+    }
+
 
 }
