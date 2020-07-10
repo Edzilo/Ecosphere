@@ -6,38 +6,30 @@ using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        SelectFirstButton();
     }
 
     private void OnEnable()
+    {
+        SelectFirstButton();
+    }
+
+
+    private void SelectFirstButton()
     {
         EventSystem.current.SetSelectedGameObject(null);
         //Button button = findFirstButton();
         Button button = GetComponentInChildren<Button>();
         if (button != null)
         {
-            button.Select();
+            print("I select " + button);
+            //button.Select();
+            //EventSystem.current.firstSelectedGameObject = button.gameObject;
+            EventSystem.current.SetSelectedGameObject(button.gameObject);
         }
-    }
-
-    private Button findFirstButton()
-    {
-        for (int i = 0; i < transform.childCount; ++i)
-        {
-            if (transform.GetChild(i).GetComponent<Button>() != null)
-            {
-                return transform.GetChild(i).gameObject.GetComponent<Button>();
-            }
-        }
-        return null;
     }
 }
+

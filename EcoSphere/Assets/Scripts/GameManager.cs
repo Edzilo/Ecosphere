@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour
 
     private bool gamePaused;
 
+    private bool gameFinished;
+
     private bool escapeStickDownLast = false;
 
     public bool submitStickDownLast = false;
@@ -82,7 +84,7 @@ public class GameManager : MonoBehaviour
             updateNaturalLights();
         }
 
-        if (Input.GetAxis("Escape") != 0)
+        if (Input.GetAxis("Escape") != 0 &&!gameFinished)
         {
             if (!escapeStickDownLast)
             {
@@ -118,12 +120,12 @@ public class GameManager : MonoBehaviour
 
     private void Win()
     {
-        print("You won");
         endScreen.SetActive(true);
         endScreen.transform.Find("Final time").GetComponent<TextMeshProUGUI>().text += " " + ComputeTime();
         player.SaveVelocity();
         player.rb.isKinematic = true;
         gamePaused = true;
+        gameFinished = true;
     }
 
     private string ComputeTime()

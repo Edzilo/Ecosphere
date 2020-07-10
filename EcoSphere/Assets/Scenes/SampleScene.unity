@@ -563,7 +563,7 @@ RectTransform:
   - {fileID: 840137157}
   - {fileID: 719917593}
   m_Father: {fileID: 2122331603}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3241,7 +3241,7 @@ RectTransform:
   - {fileID: 215379406}
   - {fileID: 1681643788}
   m_Father: {fileID: 2122331603}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6006,7 +6006,7 @@ MonoBehaviour:
   endScreen: {fileID: 2122331602}
   menu: {fileID: 881216382}
   player: {fileID: 1341628351}
-  currentCheckpoint: {fileID: 793033415}
+  currentCheckpoint: {fileID: 1880960399}
   naturalLights: {fileID: 1647648205}
   jumpable:
   - {fileID: 6795462705980167066, guid: 2a67fdf4721e8444d9724f21ad3ecc77, type: 3}
@@ -6379,7 +6379,7 @@ RectTransform:
   m_Children:
   - {fileID: 235619307}
   m_Father: {fileID: 2122331603}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7655,7 +7655,7 @@ MonoBehaviour:
   speed: 17.5
   drag: 0.995
   jumpHeight: 5.5
-  jumpCD: 0.2
+  jumpCD: 0.1
   col: {fileID: 1341628346}
   groundLayer:
     serializedVersion: 2
@@ -9751,7 +9751,7 @@ RectTransform:
   m_LocalScale: {x: 1.75, y: 1.3499999, z: 1}
   m_Children: []
   m_Father: {fileID: 2122331603}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -12333,10 +12333,10 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1671953555}
   - {fileID: 1093682444}
   - {fileID: 558490716}
   - {fileID: 44448980}
+  - {fileID: 1671953555}
   m_Father: {fileID: 1194579469}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
