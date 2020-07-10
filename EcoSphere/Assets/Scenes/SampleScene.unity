@@ -6006,7 +6006,7 @@ MonoBehaviour:
   endScreen: {fileID: 2122331602}
   menu: {fileID: 881216382}
   player: {fileID: 1341628351}
-  currentCheckpoint: {fileID: 550476394}
+  currentCheckpoint: {fileID: 793033415}
   naturalLights: {fileID: 1647648205}
   jumpable:
   - {fileID: 6795462705980167066, guid: 2a67fdf4721e8444d9724f21ad3ecc77, type: 3}
