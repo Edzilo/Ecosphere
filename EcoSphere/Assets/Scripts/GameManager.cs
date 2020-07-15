@@ -73,6 +73,7 @@ public class GameManager : MonoBehaviour
         CurrentCheckpoint.Activated = true;
         player.FallBackPosition = CurrentCheckpoint.transform.position + new Vector3(0, 0.5f, -1.0f);
         chronoText.text = ComputeTime();
+        QualitySettings.vSyncCount = 0;
     }
 
     private void Update()
@@ -81,7 +82,7 @@ public class GameManager : MonoBehaviour
         {
             runTime += Time.deltaTime;
             chronoText.text = ComputeTime();
-            updateNaturalLights();
+            //updateNaturalLights();
         }
 
         if (Input.GetAxis("Escape") != 0 &&!gameFinished)
