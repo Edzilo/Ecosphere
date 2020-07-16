@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
 
     private float currentJumpCD; // en secondes
 
-    //private bool jumpStickDownLast = false;
+    private bool jumpStickDownLast = false;
 
     private float offGroundTime;
 
@@ -111,10 +111,10 @@ public class Player : MonoBehaviour
 
         if (Input.GetAxis("Jump") != 0)
         {
-            if (!OffGround  && !jumpReloading && GameManager.Instance.LeavingPause() /*!GameManager.Instance.submitStickDownLast && !jumpStickDownLast*/)
+            if (!OffGround   && !jumpReloading && !jumpStickDownLast)
             {
 
-                //jumpStickDownLast = true;
+                jumpStickDownLast = true;
                 jumpReloading = true;
                 jump = Vector3.up;
                 jump = Camera.main.transform.TransformDirection(jump);
@@ -123,11 +123,11 @@ public class Player : MonoBehaviour
                 Vector3 jumpForce = jump.normalized * jumpHeight;
                 rb.AddForce(jumpForce, ForceMode.Impulse);
             }
-            //jumpStickDownLast = true;
+            jumpStickDownLast = true;
         }
         else
         {
-            //jumpStickDownLast = false;
+            jumpStickDownLast = false;
         }
        
         movement = Camera.main.transform.TransformDirection(movement);

@@ -6711,13 +6711,12 @@ MonoBehaviour:
   endScreen: {fileID: 2122331602}
   menu: {fileID: 881216382}
   player: {fileID: 1341628351}
-  currentCheckpoint: {fileID: 793033415}
+  currentCheckpoint: {fileID: 550476394}
   naturalLights: {fileID: 1647648205}
   jumpable:
   - {fileID: 6795462705980167066, guid: 2a67fdf4721e8444d9724f21ad3ecc77, type: 3}
   - {fileID: 3151360536437036893, guid: 2a67fdf4721e8444d9724f21ad3ecc77, type: 3}
   - {fileID: -3981065676529349206, guid: 2a67fdf4721e8444d9724f21ad3ecc77, type: 3}
-  submitStickDownLast: 0
   Checkpoints:
   - {fileID: 793033415}
   - {fileID: 1683174653}
@@ -8389,7 +8388,7 @@ MonoBehaviour:
   speed: 17.5
   drag: 0.995
   jumpHeight: 5.5
-  jumpCD: 0.05
+  jumpCD: 0.5
   col: {fileID: 1341628346}
   groundLayer:
     serializedVersion: 2

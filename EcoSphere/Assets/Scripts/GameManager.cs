@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
 
     private bool escapeStickDownLast = false;
 
-    public bool submitStickDownLast = false;
+    //public bool submitStickDownLast = false;
 
     public static GameManager Instance { get; private set; }
 
@@ -107,6 +107,7 @@ public class GameManager : MonoBehaviour
             escapeStickDownLast = false;
         }
 
+        /*
         //TODO cleanup
         if (Input.GetAxis("Submit") != 0)
         {
@@ -115,7 +116,7 @@ public class GameManager : MonoBehaviour
         else
         {
             submitStickDownLast = false;
-        }
+        }*/
 
     }
 
@@ -183,9 +184,9 @@ public class GameManager : MonoBehaviour
         return gamePaused;
     }
 
-    public bool LeavingPause()
+   /* public bool LeavingPause()
     {
         return !submitStickDownLast && !gamePaused;
-    }
+    }*/
 
 }
