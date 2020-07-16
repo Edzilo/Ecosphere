@@ -24,6 +24,9 @@ public class GameManager : MonoBehaviour
 
     public List<Material> jumpable;
 
+    public List<Material> rocks;
+
+
     private float naturalLightsSpeedfactor = 1.0f;
 
     private float runTime = 0.0f;

@@ -12,6 +12,8 @@ public class Player : MonoBehaviour
 
     public float jumpCD; // en secondes
 
+    public float collisionSoundCD; // en secondes
+
     public SphereCollider col;
 
     private bool jumpReloading = false;
@@ -19,6 +21,9 @@ public class Player : MonoBehaviour
     private Vector3 savedVelocity;
 
     private float currentJumpCD; // en secondes
+
+    public float currentCollisionSoundCD; // en secondes
+
 
     private bool jumpStickDownLast = false;
 
@@ -35,6 +40,11 @@ public class Player : MonoBehaviour
     private Vector3 lastGroundPosition;
 
     public Vector3 FallBackPosition { get; set; }
+
+    public AudioSource dirtImpact;
+    public AudioSource rockImpact;
+
+
 
     void Start()
     {
@@ -155,6 +165,22 @@ public class Player : MonoBehaviour
         {
             OffGround = true;
         }
+    }
+
+    private void OnCollisionEnter(Collision hit)
+    {
+        if (GameManager.Instance.jumpable.Contains(hit.collider.GetComponent<Renderer>().sharedMaterial)
+             && (hit.relativeVelocity.magnitude > 11.5) )
+        {
+            dirtImpact.Play(); 
+        }
+
+        if(GameManager.Instance.rocks.Contains(hit.collider.GetComponent<Renderer>().sharedMaterial)
+             && (hit.relativeVelocity.magnitude > 10))
+        {
+            rockImpact.Play();
+        }
+
     }
 
     void FallBack()
