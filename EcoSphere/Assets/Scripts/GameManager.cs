@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
 
     public List<Material> rocks;
 
+    public Camera mainCam;
+
     private float naturalLightsSpeedfactor = 1.0f;
 
     private float runTime = 0.0f;
@@ -74,6 +76,7 @@ public class GameManager : MonoBehaviour
         player.FallBackPosition = CurrentCheckpoint.transform.position + new Vector3(0, 0.5f, -1.0f);
         chronoText.text = ComputeTime();
         QualitySettings.vSyncCount = 0;
+        ShuffleAudio(mainCam.GetComponent<AudioSource>());
     }
 
     private void Update()
@@ -170,6 +173,13 @@ public class GameManager : MonoBehaviour
     public bool IsPaused()
     {
         return gamePaused;
+    }
+
+    private void ShuffleAudio(AudioSource audioSource)
+    {
+        int randomStartTime = Random.Range(0, audioSource.clip.samples - 1); //clip.samples is the lengh of the clip in samples
+        audioSource.timeSamples = randomStartTime;
+        audioSource.Play();
     }
 
 }
