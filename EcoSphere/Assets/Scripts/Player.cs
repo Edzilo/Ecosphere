@@ -33,15 +33,13 @@ public class Player : MonoBehaviour
     private bool offGround;
     public bool OffGround { get => offGround; set => offGround = value; }
 
-
     private Vector3 lastGroundPosition;
 
     public Vector3 FallBackPosition { get; set; }
 
     public AudioSource dirtImpact;
+
     public AudioSource rockImpact;
-
-
 
     void Start()
     {
@@ -67,15 +65,6 @@ public class Player : MonoBehaviour
         CollisionSoundCD.Update();
 
         RaycastHit hit;
-       /* if (jumpReloading)
-        {
-            currentJumpCD += (float)(Time.deltaTime % 3600) % 60;
-            jumpReloading = (currentJumpCD < jumpCD);
-            if (!jumpReloading)
-            {
-                currentJumpCD = 0.0f;
-            }
-        }*/
 
         if (OffGround)
         {
@@ -125,11 +114,10 @@ public class Player : MonoBehaviour
 
         if (Input.GetAxis("Jump") != 0)
         {
-            if (!OffGround  /* && !jumpReloading*/ && !jumpStickDownLast && jumpCD.isReady)
+            if (!OffGround && !jumpStickDownLast && jumpCD.isReady)
             {
 
                 jumpStickDownLast = true;
-                //jumpReloading = true;
                 jumpCD.Trigger();
                 jump = Vector3.up;
                 jump = Camera.main.transform.TransformDirection(jump);

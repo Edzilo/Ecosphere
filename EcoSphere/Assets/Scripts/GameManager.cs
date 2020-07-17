@@ -26,7 +26,6 @@ public class GameManager : MonoBehaviour
 
     public List<Material> rocks;
 
-
     private float naturalLightsSpeedfactor = 1.0f;
 
     private float runTime = 0.0f;
@@ -36,8 +35,6 @@ public class GameManager : MonoBehaviour
     private bool gameFinished;
 
     private bool escapeStickDownLast = false;
-
-    //public bool submitStickDownLast = false;
 
     public static GameManager Instance { get; private set; }
 
@@ -109,18 +106,6 @@ public class GameManager : MonoBehaviour
         {
             escapeStickDownLast = false;
         }
-
-        /*
-        //TODO cleanup
-        if (Input.GetAxis("Submit") != 0)
-        {
-            submitStickDownLast = true;
-        }
-        else
-        {
-            submitStickDownLast = false;
-        }*/
-
     }
 
     private void Win()
@@ -186,10 +171,5 @@ public class GameManager : MonoBehaviour
     {
         return gamePaused;
     }
-
-   /* public bool LeavingPause()
-    {
-        return !submitStickDownLast && !gamePaused;
-    }*/
 
 }
