@@ -8773,10 +8773,9 @@ MonoBehaviour:
   speed: 17.5
   drag: 0.995
   jumpHeight: 5.5
-  jumpCD: 0.5
-  collisionSoundCD: 0
   col: {fileID: 1341628346}
-  currentCollisionSoundCD: 0
+  collisionSoundMaxCD: 0.75
+  jumpMaxCD: 0.05
   groundLayer:
     serializedVersion: 2
     m_Bits: 1

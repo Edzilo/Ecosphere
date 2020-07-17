@@ -10,20 +10,17 @@ public class Player : MonoBehaviour
 
     public float jumpHeight;
 
-    public float jumpCD; // en secondes
-
-    public float collisionSoundCD; // en secondes
-
     public SphereCollider col;
 
-    private bool jumpReloading = false;
-
     private Vector3 savedVelocity;
+    
+    private Cooldown CollisionSoundCD; // en secondes
 
-    private float currentJumpCD; // en secondes
+    public float collisionSoundMaxCD; // en secondes
+    
+    public float jumpMaxCD; // en secondes
 
-    public float currentCollisionSoundCD; // en secondes
-
+    private Cooldown jumpCD;
 
     private bool jumpStickDownLast = false;
 
@@ -53,6 +50,10 @@ public class Player : MonoBehaviour
         transform.position = GameManager.Instance.currentCheckpoint.transform.position + new Vector3(0, 0.5f, -1.0f);
         FallBackPosition = transform.position;
         offGroundTime = 0.0f;
+
+        jumpCD = new Cooldown(jumpMaxCD);
+        CollisionSoundCD = new Cooldown(collisionSoundMaxCD);
+
     }
 
     void Update()
@@ -62,8 +63,11 @@ public class Player : MonoBehaviour
             FallBack();
         }
 
+        jumpCD.Update();
+        CollisionSoundCD.Update();
+
         RaycastHit hit;
-        if (jumpReloading)
+       /* if (jumpReloading)
         {
             currentJumpCD += (float)(Time.deltaTime % 3600) % 60;
             jumpReloading = (currentJumpCD < jumpCD);
@@ -71,7 +75,7 @@ public class Player : MonoBehaviour
             {
                 currentJumpCD = 0.0f;
             }
-        }
+        }*/
 
         if (OffGround)
         {
@@ -121,11 +125,12 @@ public class Player : MonoBehaviour
 
         if (Input.GetAxis("Jump") != 0)
         {
-            if (!OffGround   && !jumpReloading && !jumpStickDownLast)
+            if (!OffGround  /* && !jumpReloading*/ && !jumpStickDownLast && jumpCD.isReady)
             {
 
                 jumpStickDownLast = true;
-                jumpReloading = true;
+                //jumpReloading = true;
+                jumpCD.Trigger();
                 jump = Vector3.up;
                 jump = Camera.main.transform.TransformDirection(jump);
                 jump.x = 0;
@@ -169,17 +174,26 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter(Collision hit)
     {
-        if (GameManager.Instance.jumpable.Contains(hit.collider.GetComponent<Renderer>().sharedMaterial)
-             && (hit.relativeVelocity.magnitude > 11.5) )
+        if (CollisionSoundCD.isReady)
         {
-            dirtImpact.Play(); 
-        }
+            CollisionSoundCD.Trigger();
+            //HITTING DIRT
+            if (GameManager.Instance.jumpable.Contains(hit.collider.GetComponent<Renderer>().sharedMaterial)
+                 && (hit.relativeVelocity.magnitude > 10))
+            {
+                dirtImpact.volume = Mathf.Clamp((hit.relativeVelocity.magnitude / 18), 0.0f, 1.0f);
+                dirtImpact.Play();
+            }
 
-        if(GameManager.Instance.rocks.Contains(hit.collider.GetComponent<Renderer>().sharedMaterial)
-             && (hit.relativeVelocity.magnitude > 10))
-        {
-            rockImpact.Play();
+            //HITTING ROCK
+            if (GameManager.Instance.rocks.Contains(hit.collider.GetComponent<Renderer>().sharedMaterial)
+                 && (hit.relativeVelocity.magnitude > 10))
+            {
+                rockImpact.volume = Mathf.Clamp((hit.relativeVelocity.magnitude / 18), 0.0f, 1.0f);
+                rockImpact.Play();
+            }
         }
+        
 
     }
 
