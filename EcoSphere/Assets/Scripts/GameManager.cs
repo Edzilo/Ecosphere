@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject naturalLights;
 
+    public GameObject ambientSounds;
+
     public List<Material> jumpable;
 
     public List<Material> rocks;
@@ -77,6 +79,7 @@ public class GameManager : MonoBehaviour
         chronoText.text = ComputeTime();
         QualitySettings.vSyncCount = 0;
         ShuffleAudio(mainCam.GetComponent<AudioSource>());
+        ShuffleAmbientSounds();
     }
 
     private void Update()
@@ -177,9 +180,16 @@ public class GameManager : MonoBehaviour
 
     private void ShuffleAudio(AudioSource audioSource)
     {
-        int randomStartTime = Random.Range(0, audioSource.clip.samples - 1); //clip.samples is the lengh of the clip in samples
-        audioSource.timeSamples = randomStartTime;
+        audioSource.timeSamples = Random.Range(0, audioSource.clip.samples - 1); ;
         audioSource.Play();
+    }
+
+    private void ShuffleAmbientSounds()
+    {
+        foreach (Transform child in ambientSounds.transform)
+        {
+            ShuffleAudio(child.GetComponent<AudioSource>());
+        }
     }
 
 }
