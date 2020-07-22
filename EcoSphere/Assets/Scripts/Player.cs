@@ -26,6 +26,8 @@ public class Player : MonoBehaviour
 
     private float offGroundTime;
 
+    private bool isFallingBack;
+
     public LayerMask groundLayer;
 
     public Rigidbody rb;
@@ -40,6 +42,9 @@ public class Player : MonoBehaviour
     public AudioSource dirtImpact;
 
     public AudioSource rockImpact;
+
+    public AudioSource waterImpact;
+
 
     void Start()
     {
@@ -146,7 +151,8 @@ public class Player : MonoBehaviour
             rb.drag = 0.5f;
             OffGround = false;
         }
-        if (hit.collider.GetComponent<Renderer>().sharedMaterial.name == "background")
+        if (hit.collider.GetComponent<Renderer>().sharedMaterial.name == "background" ||
+            hit.collider.GetComponent<Renderer>().sharedMaterial.name == "Water")
         {
             FallBack();
         }
@@ -181,16 +187,33 @@ public class Player : MonoBehaviour
                 rockImpact.Play();
             }
         }
+
         
+
 
     }
 
-    void FallBack()
+    public void FallBack(bool wait = false)
     {
+        if(!isFallingBack)
+            StartCoroutine(FallBAckCoroutine(wait));
+    }
+
+    /* TEST */
+
+    IEnumerator FallBAckCoroutine(bool wait)
+    {
+        isFallingBack = true;
+        if (wait)
+            yield return new WaitForSeconds(0.5f);
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
+        rb.drag = 0.5f;
         lastGroundPosition = FallBackPosition;
         transform.position = FallBackPosition;
+        isFallingBack = false;
+
+
     }
 
     public bool IsAboveJumpable()
