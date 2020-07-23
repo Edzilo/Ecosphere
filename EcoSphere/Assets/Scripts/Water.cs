@@ -18,7 +18,8 @@ public class Water : MonoBehaviour
                 other.GetComponent<Player>().FallBack(true);
             }
 
-            //other.GetComponent<Player>().waterImpact.volume = Mathf.Clamp((other.relativeVelocity.magnitude / speed), 0.0f, 1.0f);
+            other.GetComponent<Player>().waterImpact.volume = 
+                Mathf.Clamp((other.attachedRigidbody.velocity.magnitude / other.GetComponent<Player>().speed), 0.0f, 1.0f);
 
         }
 
