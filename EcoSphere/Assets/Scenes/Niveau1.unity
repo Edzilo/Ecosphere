@@ -3863,10 +3863,20 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 286
       objectReference: {fileID: 0}
+    - target: {fileID: -5145003402640487804, guid: 2a67fdf4721e8444d9724f21ad3ecc77,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 102
+      objectReference: {fileID: 0}
     - target: {fileID: -5134477884888296903, guid: 2a67fdf4721e8444d9724f21ad3ecc77,
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -4754483789978644934, guid: 2a67fdf4721e8444d9724f21ad3ecc77,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 104
       objectReference: {fileID: 0}
     - target: {fileID: -4628617160327126625, guid: 2a67fdf4721e8444d9724f21ad3ecc77,
         type: 3}
@@ -3979,6 +3989,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -1476835498826977141, guid: 2a67fdf4721e8444d9724f21ad3ecc77,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 103
       objectReference: {fileID: 0}
     - target: {fileID: -1123259407070174301, guid: 2a67fdf4721e8444d9724f21ad3ecc77,
         type: 3}
@@ -9609,6 +9624,7 @@ MonoBehaviour:
   - {fileID: 6795462705980167066, guid: 2a67fdf4721e8444d9724f21ad3ecc77, type: 3}
   - {fileID: 3151360536437036893, guid: 2a67fdf4721e8444d9724f21ad3ecc77, type: 3}
   - {fileID: -3981065676529349206, guid: 2a67fdf4721e8444d9724f21ad3ecc77, type: 3}
+  - {fileID: 6900932135438728070, guid: 2a67fdf4721e8444d9724f21ad3ecc77, type: 3}
   rocks:
   - {fileID: -8503537614354909302, guid: 2a67fdf4721e8444d9724f21ad3ecc77, type: 3}
   - {fileID: -8936382171990111954, guid: 2a67fdf4721e8444d9724f21ad3ecc77, type: 3}
