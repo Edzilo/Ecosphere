@@ -205,7 +205,7 @@ public class Player : MonoBehaviour
     {
         isFallingBack = true;
         if (wait)
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.25f);
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         rb.drag = 0.5f;
