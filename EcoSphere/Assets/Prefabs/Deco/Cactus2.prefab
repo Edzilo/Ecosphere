@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5194867152855228043}
   - component: {fileID: 271323655950001216}
   m_Layer: 0
-  m_Name: Cactus2 (6)
+  m_Name: Cactus2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 5776770502405515863}
   m_LocalRotation: {x: -0.6656266, y: -0.23862368, z: -0.23862368, w: 0.6656266}
   m_LocalPosition: {x: -38.901554, y: -0.719, z: 6.6481333}
-  m_LocalScale: {x: 75, y: 75, z: 75}
+  m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5513309397830197496}
   - component: {fileID: 5544546207609694233}
   m_Layer: 0
-  m_Name: Cactus_ball1_flower1 (1)
+  m_Name: Cactus_ball1_flower1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 6106849910969062436}
   m_LocalRotation: {x: 0.52088416, y: -0.49932492, z: -0.50754, w: -0.47091135}
   m_LocalPosition: {x: -97.998, y: -1.341, z: 8.968}
-  m_LocalScale: {x: 149.90793, y: 149.90796, z: 149.90791}
+  m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
