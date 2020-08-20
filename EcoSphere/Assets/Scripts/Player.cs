@@ -78,8 +78,11 @@ public class Player : MonoBehaviour
             vel.z *= drag;
             rb.velocity = vel;
 
-            offGroundTime += Time.deltaTime;
-            if(offGroundTime >= 2.0f 
+            if (!GameManager.Instance.IsPaused())
+            {
+                offGroundTime += Time.deltaTime;       
+            }
+            if (offGroundTime >= 2.0f 
                 && Physics.Raycast(transform.position, -Camera.main.transform.TransformDirection(Vector3.up), out hit)
                 && hit.distance >= 2.0f && hit.collider.GetComponent<Renderer>() != null 
                 && !GameManager.Instance.jumpable.Contains(hit.collider.GetComponent<Renderer>().sharedMaterial))
