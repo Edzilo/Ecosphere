@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
 
     public float jumpHeight;
 
-    public SphereCollider col;
+    private SphereCollider col;
 
     private Vector3 savedVelocity;
     
@@ -69,7 +69,6 @@ public class Player : MonoBehaviour
         jumpCD.Update();
         CollisionSoundCD.Update();
 
-        RaycastHit hit;
 
         if (OffGround)
         {
@@ -80,19 +79,21 @@ public class Player : MonoBehaviour
 
             if (!GameManager.Instance.IsPaused())
             {
-                offGroundTime += Time.deltaTime;       
+                offGroundTime += Time.deltaTime;
             }
-            if (offGroundTime >= 2.0f 
-                && Physics.Raycast(transform.position, -Camera.main.transform.TransformDirection(Vector3.up), out hit)
-                && hit.distance >= 2.0f && hit.collider.GetComponent<Renderer>() != null 
+            if (offGroundTime >= 2.0f
+                && Physics.Raycast(transform.position, -Camera.main.transform.TransformDirection(Vector3.up), out RaycastHit hit)
+                && hit.distance >= 2.0f && hit.collider.GetComponent<Renderer>() != null
                 && !GameManager.Instance.jumpable.Contains(hit.collider.GetComponent<Renderer>().sharedMaterial))
             {
                 FallBack();
-            } else if (IsAboveJumpable())
+            }
+            else if (IsAboveJumpable())
             {
                 offGroundTime = 0.0f;
             }
-        } else
+        }
+        else
         {
             offGroundTime = 0.0f;
         }
@@ -217,8 +218,7 @@ public class Player : MonoBehaviour
 
     public bool IsAboveJumpable()
     {
-        RaycastHit hit;
-        return Physics.Raycast(transform.position, -Camera.main.transform.TransformDirection(Vector3.up), out hit)
+        return Physics.Raycast(transform.position, -Camera.main.transform.TransformDirection(Vector3.up), out RaycastHit hit)
                 && hit.collider.GetComponent<Renderer>() != null
                 && GameManager.Instance.jumpable.Contains(hit.collider.GetComponent<Renderer>().sharedMaterial);
     }
