@@ -13114,6 +13114,8 @@ MonoBehaviour:
   target: {fileID: 1341628349}
   smoothSpeed: 0.125
   offset: {x: -2, y: 3, z: -5}
+  offsetTransitionTime: 2
+  rotationTransitionTime: 2
 --- !u!82 &963194230
 AudioSource:
   m_ObjectHideFlags: 0
@@ -13864,7 +13866,7 @@ MonoBehaviour:
   endScreen: {fileID: 2122331602}
   menu: {fileID: 881216382}
   player: {fileID: 1341628351}
-  currentCheckpoint: {fileID: 793033415}
+  currentCheckpoint: {fileID: 550476394}
   naturalLights: {fileID: 1647648205}
   ambientSounds: {fileID: 401388831}
   jumpable:
