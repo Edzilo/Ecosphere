@@ -192,4 +192,25 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void ChangeCameraOffset(Vector3 modification)
+    {
+        var cameraSettings = Camera.main.GetComponent<CameraFollow>();
+        cameraSettings.StartCoroutine(cameraSettings.ChangeOffset(cameraSettings.offset + modification));
+        //cameraSettings.offset += modification;
+
+    }
+
+    public void ChangeCameraRotation(Vector3 modification)
+    {
+        var currentRotation = Camera.main.transform.rotation.eulerAngles;
+        var cameraSettings = Camera.main.GetComponent<CameraFollow>();
+        var rotation = Quaternion.Euler(
+            modification.x + currentRotation.x
+            , modification.y + currentRotation.y 
+            , modification.z + currentRotation.z);
+
+        cameraSettings.StartCoroutine(cameraSettings.ChangeRotation(rotation));
+    }
+
+
 }

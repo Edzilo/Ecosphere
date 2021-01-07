@@ -7,6 +7,10 @@ public class Checkpoint : MonoBehaviour
     public int number;
     private bool activated;
 
+    public Vector3 camera_offset_modification;
+    public Vector3 camera_rotation_modification;
+
+
     public GameObject model_on;
     public GameObject model_off;
 
@@ -35,6 +39,8 @@ public class Checkpoint : MonoBehaviour
                     GameManager.Instance.CurrentCheckpoint = this;
                     model_off.SetActive(false);
                     model_on.SetActive(true);
+                    GameManager.Instance.ChangeCameraOffset(camera_offset_modification);
+                    GameManager.Instance.ChangeCameraRotation(camera_rotation_modification);
                 }
             } else
             {

@@ -1015,6 +1015,21 @@ PrefabInstance:
       propertyPath: number
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 7873719797054198571, guid: 695c4e2f6ba161a4eba23164c8207a4f,
+        type: 3}
+      propertyPath: camera_offset_modification.z
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7873719797054198571, guid: 695c4e2f6ba161a4eba23164c8207a4f,
+        type: 3}
+      propertyPath: camera_offset_modification.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7873719797054198571, guid: 695c4e2f6ba161a4eba23164c8207a4f,
+        type: 3}
+      propertyPath: camera_rotation_modification.x
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 695c4e2f6ba161a4eba23164c8207a4f, type: 3}
 --- !u!4 &49294404 stripped
@@ -12309,6 +12324,21 @@ PrefabInstance:
         type: 3}
       propertyPath: number
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7873719797054198571, guid: 695c4e2f6ba161a4eba23164c8207a4f,
+        type: 3}
+      propertyPath: camera_offset_modification.z
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7873719797054198571, guid: 695c4e2f6ba161a4eba23164c8207a4f,
+        type: 3}
+      propertyPath: camera_rotation_modification.x
+      value: -20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7873719797054198571, guid: 695c4e2f6ba161a4eba23164c8207a4f,
+        type: 3}
+      propertyPath: camera_offset_modification.y
+      value: -2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 695c4e2f6ba161a4eba23164c8207a4f, type: 3}
