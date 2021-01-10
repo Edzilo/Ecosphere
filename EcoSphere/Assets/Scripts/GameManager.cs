@@ -48,8 +48,7 @@ public class GameManager : MonoBehaviour
             currentCheckpoint.Activated = false;
             currentCheckpoint = value;
             player.FallBackPosition = Checkpoints[value.number].transform.position + new Vector3(0,0.5f,-1.0f);
-            if(CurrentCheckpoint.number != 0)checkpointTimes.text += "(" + currentCheckpoint.number 
-                    + ") " + ComputeTime() + "\n";
+            if(CurrentCheckpoint.number != 0)checkpointTimes.text += ComputeTime() + "\n";
             if(currentCheckpoint.number == Checkpoints.Count - 1)
             {
                 Win();
@@ -128,7 +127,12 @@ public class GameManager : MonoBehaviour
     {
         int minutes = (int)(runTime % 3600) / 60;
         int seconds = (int)(runTime % 3600) % 60;
-        return "" + minutes + ":" + seconds + ":" + System.Math.Round(((runTime - (int) runTime) * 100),0);
+        string secondsString =  seconds.ToString();
+        if(seconds < 10)
+        {
+            secondsString = "0" + seconds;
+        }
+        return "" + minutes + ":" + secondsString + ":" + System.Math.Round(((runTime - (int) runTime) * 100),0);
     }
 
     private void updateNaturalLights()
