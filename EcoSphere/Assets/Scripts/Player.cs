@@ -55,8 +55,8 @@ public class Player : MonoBehaviour
         FallBackPosition = transform.position;
         offGroundTime = 0.0f;
 
-        jumpCD = new Cooldown(jumpMaxCD);
-        CollisionSoundCD = new Cooldown(collisionSoundMaxCD);
+        jumpCD = new Cooldown(jumpMaxCD,this);
+        CollisionSoundCD = new Cooldown(collisionSoundMaxCD,this);
 
     }
 
@@ -66,9 +66,6 @@ public class Player : MonoBehaviour
         {
             FallBack();
         }
-
-        jumpCD.Update();
-        CollisionSoundCD.Update();
 
 
         if (OffGround)
@@ -194,11 +191,16 @@ public class Player : MonoBehaviour
         }
     }
 
+    //METHODS 
+
     public void FallBack(bool wait = false)
     {
         if(!isFallingBack)
             StartCoroutine(FallBAckCoroutine(wait));
     }
+
+    //COROUTINES
+
 
     IEnumerator FallBAckCoroutine(bool wait)
     {
