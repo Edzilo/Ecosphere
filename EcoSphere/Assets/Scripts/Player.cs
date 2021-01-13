@@ -50,6 +50,7 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         col = GetComponent<SphereCollider>();
+        //Put the player on the first checkpoint
         transform.position = GameManager.Instance.currentCheckpoint.transform.position + new Vector3(0, 0.5f, -1.0f);
         FallBackPosition = transform.position;
         offGroundTime = 0.0f;
@@ -199,8 +200,6 @@ public class Player : MonoBehaviour
             StartCoroutine(FallBAckCoroutine(wait));
     }
 
-    /* TEST */
-
     IEnumerator FallBAckCoroutine(bool wait)
     {
         isFallingBack = true;
@@ -212,8 +211,6 @@ public class Player : MonoBehaviour
         lastGroundPosition = FallBackPosition;
         transform.position = FallBackPosition;
         isFallingBack = false;
-
-
     }
 
     public bool IsAboveJumpable()
