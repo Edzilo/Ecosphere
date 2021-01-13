@@ -35,7 +35,7 @@ public class Checkpoint : MonoBehaviour
                 if( !activated)
                 {
                     audioSource.PlayOneShot(clip, volume);
-                    print("Checkpoint " + number + " activated");
+                    //print("Checkpoint " + number + " activated");
                     GameManager.Instance.CurrentCheckpoint = this;
                     model_off.SetActive(false);
                     model_on.SetActive(true);

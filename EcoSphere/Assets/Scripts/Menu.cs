@@ -21,13 +21,9 @@ public class Menu : MonoBehaviour
     private void SelectFirstButton()
     {
         EventSystem.current.SetSelectedGameObject(null);
-        //Button button = findFirstButton();
         Button button = GetComponentInChildren<Button>();
         if (button != null)
         {
-            print("I select " + button);
-            //button.Select();
-            //EventSystem.current.firstSelectedGameObject = button.gameObject;
             EventSystem.current.SetSelectedGameObject(button.gameObject);
         }
     }
