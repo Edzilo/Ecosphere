@@ -8,6 +8,10 @@ public class EndGameButton : MonoBehaviour
 {
 
     public GameObject creditsPanel;
+    public GameObject loadingPanel;
+
+
+
 
 
     public void RestartGame()
@@ -48,6 +52,30 @@ public class EndGameButton : MonoBehaviour
         if (button != null)
         {
             EventSystem.current.SetSelectedGameObject(button.gameObject);
+        }
+    }
+
+
+    public void PlayGame()
+    {
+        StartCoroutine(PlayGameCoroutine());
+    }
+
+    private IEnumerator PlayGameCoroutine()
+    {
+        loadingPanel.SetActive(true);
+        yield return new WaitForSeconds(0.25f);
+        while (!Input.anyKey)
+        {
+            // While the user does not press any key, we simply wait until next frame. 
+            yield return null;
+        }
+
+
+        AsyncOperation loadSceneOperation = SceneManager.LoadSceneAsync("Niveau1");
+        while (!loadSceneOperation.isDone)
+        {
+            yield return null;
         }
     }
 

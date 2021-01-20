@@ -3337,6 +3337,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8c3227f4fe0afe4993d478b94cfb89d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  creditsPanel: {fileID: 0}
+  loadingPanel: {fileID: 0}
 --- !u!1001 &219438819
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11301,6 +11303,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8c3227f4fe0afe4993d478b94cfb89d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  creditsPanel: {fileID: 0}
+  loadingPanel: {fileID: 0}
 --- !u!1001 &849874141
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14507,6 +14511,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8c3227f4fe0afe4993d478b94cfb89d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  creditsPanel: {fileID: 0}
+  loadingPanel: {fileID: 0}
 --- !u!1001 &1063830820
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17532,7 +17538,7 @@ MonoBehaviour:
   speed: 20
   drag: 0.995
   jumpHeight: 5.5
-  collisionSoundMaxCD: 0.75
+  collisionSoundMaxCD: 1.25
   jumpMaxCD: 0.05
   groundLayer:
     serializedVersion: 2
@@ -23699,6 +23705,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8c3227f4fe0afe4993d478b94cfb89d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  creditsPanel: {fileID: 0}
+  loadingPanel: {fileID: 0}
 --- !u!1001 &1761198357
 PrefabInstance:
   m_ObjectHideFlags: 0
