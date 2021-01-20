@@ -94,7 +94,6 @@ public class GameManager : MonoBehaviour
         {
             if (!escapeStickDownLast)
             {
-                print("start " + Time.time);
                 if (gamePaused)
                 {
                     ResumeGame();

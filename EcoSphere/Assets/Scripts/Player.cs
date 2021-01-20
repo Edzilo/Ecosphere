@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
 
     private bool jumpStickDownLast = false;
 
-    private float offGroundTime;
+    //private float offGroundTime;
 
     private bool isFallingBack;
 
@@ -53,10 +53,9 @@ public class Player : MonoBehaviour
         //Put the player on the first checkpoint
         transform.position = GameManager.Instance.currentCheckpoint.transform.position + new Vector3(0, 0.5f, -1.0f);
         FallBackPosition = transform.position;
-        offGroundTime = 0.0f;
 
-        jumpCD = new Cooldown(jumpMaxCD);
-        CollisionSoundCD = new Cooldown(collisionSoundMaxCD);
+        jumpCD = new Cooldown(jumpMaxCD,this);
+        CollisionSoundCD = new Cooldown(collisionSoundMaxCD,this);
 
     }
 
@@ -65,38 +64,6 @@ public class Player : MonoBehaviour
         if (Input.GetAxis("Restart") != 0 && !GameManager.Instance.IsPaused())
         {
             FallBack();
-        }
-
-        jumpCD.Update();
-        CollisionSoundCD.Update();
-
-
-        if (OffGround)
-        {
-            Vector3 vel = rb.velocity;
-            vel.x *= drag;
-            vel.z *= drag;
-            rb.velocity = vel;
-
-            if (!GameManager.Instance.IsPaused())
-            {
-                offGroundTime += Time.deltaTime;
-            }
-            if (offGroundTime >= 2.0f
-                && Physics.Raycast(transform.position, -Camera.main.transform.TransformDirection(Vector3.up), out RaycastHit hit)
-                && hit.distance >= 2.0f && hit.collider.GetComponent<Renderer>() != null
-                && !GameManager.Instance.jumpable.Contains(hit.collider.GetComponent<Renderer>().sharedMaterial))
-            {
-                FallBack();
-            }
-            else if (IsAboveJumpable())
-            {
-                offGroundTime = 0.0f;
-            }
-        }
-        else
-        {
-            offGroundTime = 0.0f;
         }
     }
 
@@ -167,7 +134,7 @@ public class Player : MonoBehaviour
     {
         if (hit.gameObject.layer == 0)
         {
-            OffGround = true;
+            StartCoroutine(OffGroundRoutine());
         }
     }
 
@@ -194,23 +161,12 @@ public class Player : MonoBehaviour
         }
     }
 
+    //METHODS 
+
     public void FallBack(bool wait = false)
     {
         if(!isFallingBack)
             StartCoroutine(FallBAckCoroutine(wait));
-    }
-
-    IEnumerator FallBAckCoroutine(bool wait)
-    {
-        isFallingBack = true;
-        if (wait)
-            yield return new WaitForSeconds(0.25f);
-        rb.velocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
-        rb.drag = 0.5f;
-        lastGroundPosition = FallBackPosition;
-        transform.position = FallBackPosition;
-        isFallingBack = false;
     }
 
     public bool IsAboveJumpable()
@@ -229,4 +185,56 @@ public class Player : MonoBehaviour
     {
         rb.velocity = savedVelocity;
     }
+
+    //COROUTINES
+
+
+    IEnumerator FallBAckCoroutine(bool wait)
+    {
+        isFallingBack = true;
+        if (wait)
+            yield return new WaitForSeconds(0.25f);
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        rb.drag = 0.5f;
+        lastGroundPosition = FallBackPosition;
+        transform.position = FallBackPosition;
+        isFallingBack = false;
+        yield return null;
+    }
+
+    IEnumerator OffGroundRoutine()
+    {
+        OffGround = true;
+        float offGroundTime = 0.0f;
+
+        while (OffGround)
+        {
+            Vector3 vel = rb.velocity;
+            vel.x *= drag;
+            vel.z *= drag;
+            rb.velocity = vel;
+
+            if (!GameManager.Instance.IsPaused())
+            {
+                offGroundTime += Time.deltaTime;
+            }
+            if (offGroundTime >= 2.0f
+                && Physics.Raycast(transform.position, -Camera.main.transform.TransformDirection(Vector3.up), out RaycastHit hit)
+                && hit.distance >= 2.0f && hit.collider.GetComponent<Renderer>() != null
+                && !GameManager.Instance.jumpable.Contains(hit.collider.GetComponent<Renderer>().sharedMaterial))
+            {
+                FallBack();
+            }
+            else if (IsAboveJumpable())
+            {
+                offGroundTime = 0.0f;
+            }
+            yield return new WaitForFixedUpdate();
+        }
+
+        yield return null;
+    }
+
+    
 }
