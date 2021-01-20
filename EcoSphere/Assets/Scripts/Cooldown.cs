@@ -32,7 +32,9 @@ public class Cooldown
         {
             elapsedTime += Time.deltaTime;
             isReady = elapsedTime >= maxCD;
+            yield return null;
         }
+
         yield return 0;
     }
 }

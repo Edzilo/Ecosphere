@@ -142,13 +142,14 @@ public class Player : MonoBehaviour
     {
         if (CollisionSoundCD.isReady)
         {
-            CollisionSoundCD.Trigger();
             //HITTING DIRT
             if (GameManager.Instance.jumpable.Contains(hit.collider.GetComponent<Renderer>().sharedMaterial)
                  && (hit.relativeVelocity.magnitude > (0.50 * speed) ))
             {
                 dirtImpact.volume = Mathf.Clamp((hit.relativeVelocity.magnitude / speed), 0.0f, 1.0f);
                 dirtImpact.Play();
+                CollisionSoundCD.Trigger();
+
             }
 
             //HITTING ROCK
@@ -157,6 +158,8 @@ public class Player : MonoBehaviour
             {
                 rockImpact.volume = Mathf.Clamp((hit.relativeVelocity.magnitude / speed), 0.0f, 1.0f);
                 rockImpact.Play();
+                CollisionSoundCD.Trigger();
+
             }
         }
     }
